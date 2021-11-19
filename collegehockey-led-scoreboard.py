@@ -5,6 +5,7 @@ import requests
 import json
 import time
 import math
+import os.path
 
 def getTeamData():
     """Create team names and abreviations for NCAA Mens Hockey, return information as a list of dictionaries.
@@ -349,27 +350,49 @@ def displayLogos(awayTeam, homeTeam):
     # Difine the max width and height that a logo can be.
     logoSize = (40,30)
 
-    if not any(d['Team Abbreviation'] == awayTeam for d in getTeamData()):
-        # Load, crop, and resize the away team logo.
-        awayLogo = Image.open("assets/images/team logos/png/NCAA.png")
-        awayLogo = cropImage(awayLogo)
-        awayLogo.thumbnail(logoSize)
-    else:
+    if os.path.exists("assets/images/team logos/png/" + awayTeam + ".png"):
         # Load, crop, and resize the away team logo.
         awayLogo = Image.open("assets/images/team logos/png/" + awayTeam + ".png")
         awayLogo = cropImage(awayLogo)
         awayLogo.thumbnail(logoSize)
-
-    if not any(d['Team Abbreviation'] == homeTeam for d in getTeamData()):
-        # Load, crop, and resize the home team logo.
-        homeLogo = Image.open("assets/images/team logos/png/NCAA.png")
-        homeLogo = cropImage(homeLogo)
-        homeLogo.thumbnail(logoSize)
     else:
+        # Load, crop, and resize the away team logo.
+        awayLogo = Image.open("assets/images/team logos/png/NCAA.png")
+        awayLogo = cropImage(awayLogo)
+        awayLogo.thumbnail(logoSize)
+
+    if os.path.exists("assets/images/team logos/png/" + homeTeam + ".png"):
         # Load, crop, and resize the home team logo.
         homeLogo = Image.open("assets/images/team logos/png/" + homeTeam + ".png")
         homeLogo = cropImage(homeLogo)
         homeLogo.thumbnail(logoSize)
+    else:
+        # Load, crop, and resize the home team logo.
+        homeLogo = Image.open("assets/images/team logos/png/NCAA.png")
+        homeLogo = cropImage(homeLogo)
+        homeLogo.thumbnail(logoSize)
+
+    # if not any(d['Team Abbreviation'] == awayTeam for d in getTeamData()):
+    #     # Load, crop, and resize the away team logo.
+    #     awayLogo = Image.open("assets/images/team logos/png/NCAA.png")
+    #     awayLogo = cropImage(awayLogo)
+    #     awayLogo.thumbnail(logoSize)
+    # else:
+    #     # Load, crop, and resize the away team logo.
+    #     awayLogo = Image.open("assets/images/team logos/png/" + awayTeam + ".png")
+    #     awayLogo = cropImage(awayLogo)
+    #     awayLogo.thumbnail(logoSize)
+
+    # if not any(d['Team Abbreviation'] == homeTeam for d in getTeamData()):
+    #     # Load, crop, and resize the home team logo.
+    #     homeLogo = Image.open("assets/images/team logos/png/NCAA.png")
+    #     homeLogo = cropImage(homeLogo)
+    #     homeLogo.thumbnail(logoSize)
+    # else:
+    #     # Load, crop, and resize the home team logo.
+    #     homeLogo = Image.open("assets/images/team logos/png/" + homeTeam + ".png")
+    #     homeLogo = cropImage(homeLogo)
+    #     homeLogo.thumbnail(logoSize)
 
     # Record the width and heights of the logos.
     awayLogoWidth, awayLogoHeight = awayLogo.size
