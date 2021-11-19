@@ -5,12 +5,12 @@ Work in progress fork of the awesome [rpi-led-nhl-scoreboard](https://github.com
 Display live NCAA game scores, start times, etc. on a LED matrix driven by a Raspberry Pi. Makes use of the unofficial NCAA API for all game information.
 
 ## Installation Instructions
-These instructitons assume some basic knowledge of Unix and how to edit files via the command line.
-1. Flash an SD card with [Rasberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/) on your personal computer.
+These instructions assume some basic knowledge of Unix and how to edit files via the command line.
+1. Flash an SD card with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/) on your personal computer.
 
 2. Unplug and replug the SD card.
 
-3. Add an empty file named "ssh" to the boot directory on the SD card. Navagate to the SD card and enter the following command.
+3. Add an empty file named "ssh" to the boot directory on the SD card. Navigate to the SD card and enter the following command.
     ```bash
     touch ssh
     ```
@@ -21,7 +21,7 @@ These instructitons assume some basic knowledge of Unix and how to edit files vi
     touch wpa_supplicant.conf
     ```
 
-    Add the following to wpa_supplicant.conf using your text editor of choice. Configure the network information and two didgit [country code](https://www.iban.com/country-codes) as per your needs.
+    Add the following to wpa_supplicant.conf using your text editor of choice. Configure the network information and two digit [country code](https://www.iban.com/country-codes) as per your needs.
     ```
     country=US
     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -81,7 +81,7 @@ These instructitons assume some basic knowledge of Unix and how to edit files vi
     git clone --recursive https://github.com/byrneta/collegehockey-led-scoreboard.git
     ```
 
-13. Install the LED Matrix Python package. Navagate to the root directory of the matrix library (/submodules/rpi-rgb-led-matrix @ dfc27c1) and enter the following commands.
+13. Install the LED Matrix Python package. Navigate to the root directory of the matrix library (/submodules/rpi-rgb-led-matrix @ dfc27c1) and enter the following commands.
     ```bash
     sudo apt-get update && sudo apt-get install python3-dev python3-pillow -y
 
