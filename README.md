@@ -1,8 +1,10 @@
 # Raspberry Pi LED Matrix NCAA Hockey Scoreboard
 
-Work in progress fork of the awesome [rpi-led-nhl-scoreboard](https://github.com/gidger/rpi-led-nhl-scoreboard) which was inspired by [nhl-led-scoreboard](https://github.com/riffnshred/nhl-led-scoreboard).
+Work in progress fork of the awesome [rpi-led-nhl-scoreboard](https://github.com/gidger/rpi-led-nhl-scoreboard) which was inspired by [nhl-led-scoreboard](https://github.com/riffnshred/nhl-led-scoreboard). Still working out the bugs so it may crash unexpectedly...
 
 Display live NCAA game scores, start times, etc. on a LED matrix driven by a Raspberry Pi. Makes use of the unofficial NCAA API for all game information.
+
+![Example](https://github.com/byrneta/collegehockey-led-scoreboard/blob/main/examples/demo.jpeg)
 
 ## Installation Instructions
 These instructions assume some basic knowledge of Unix and how to edit files via the command line.
