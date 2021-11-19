@@ -328,7 +328,7 @@ def buildNoGamesToday():
 
     # Add the NCAA logo to the image.
     ncaaLogo = Image.open("assets/images/NCAA_Logo_Simplified.png")
-    ncaaLogo = cropImage(ncaaLogo)
+    #ncaaLogo = cropImage(ncaaLogo)
     ncaaLogo.thumbnail((40,30))
     image.paste(ncaaLogo, (1, 1))
 
@@ -342,7 +342,7 @@ def buildLoading():
 
     # Add the NCAA logo to the image.
     ncaaLogo = Image.open("assets/images/NCAA_Logo_Simplified.png")
-    ncaaLogo = cropImage(ncaaLogo)
+    #ncaaLogo = cropImage(ncaaLogo)
     ncaaLogo.thumbnail((40,30))
     image.paste(ncaaLogo, (1, 1))
 
@@ -365,23 +365,23 @@ def displayLogos(awayTeam, homeTeam):
         # Load, crop, and resize the away team logo.
         awayLogo = Image.open("assets/images/team logos/png/" + awayTeam + ".png")
         #awayLogo = cropImage(awayLogo)
-        awayLogo.thumbnail(logoSize, Image.ANTIALIAS)
+        awayLogo.thumbnail(logoSize)
     else:
         # Load, crop, and resize the away team logo.
         awayLogo = Image.open("assets/images/team logos/png/NCAA.png")
         #awayLogo = cropImage(awayLogo)
-        awayLogo.thumbnail(logoSize, Image.ANTIALIAS)
+        awayLogo.thumbnail(logoSize)
 
     if os.path.exists("assets/images/team logos/png/" + homeTeam + ".png"):
         # Load, crop, and resize the home team logo.
         homeLogo = Image.open("assets/images/team logos/png/" + homeTeam + ".png")
         #homeLogo = cropImage(homeLogo)
-        homeLogo.thumbnail(logoSize, Image.ANTIALIAS)
+        homeLogo.thumbnail(logoSize)
     else:
         # Load, crop, and resize the home team logo.
         homeLogo = Image.open("assets/images/team logos/png/NCAA.png")
         #homeLogo = cropImage(homeLogo)
-        homeLogo.thumbnail(logoSize, Image.ANTIALIAS)
+        homeLogo.thumbnail(logoSize)
 
     # if not any(d['Team Abbreviation'] == awayTeam for d in getTeamData()):
     #     # Load, crop, and resize the away team logo.
