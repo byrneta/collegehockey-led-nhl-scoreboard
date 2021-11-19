@@ -232,7 +232,7 @@ def buildGameNotStarted(game):
     #startTime = str(startTime) # Cast to a string for easier parsing.
 
     # Add the start time to the image. Adjust placement for times before/after 10pm local time.
-    if len(startTime == 0):
+    if len(startTime) == 0:
         draw.text((firstMiddleCol+3,22), "?", font=fontSmallReg, fill=fillWhite)
         # Colon (manual dots since the font's colon looks funny).
         draw.rectangle(((firstMiddleCol+8,25),(firstMiddleCol+8,25)), fill=fillWhite)
