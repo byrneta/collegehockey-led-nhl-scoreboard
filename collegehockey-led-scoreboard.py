@@ -301,8 +301,9 @@ def buildGameOver(game, scoringTeam):
 
     # Check if the game ended in overtime or a shootout.
     # If so, add that to the image.
-    if game['Period Name'] == "OT" or game['Period Name'] == "SO":
-        draw.text((firstMiddleCol+6,9), game['Period Name'], font=fontMedReg, fill=fillWhite)
+    if game['Period Name'] == "FINAL (OT)" or game['Period Name'] == "SO":
+        draw.text((firstMiddleCol+6,9), "OT", font=fontMedReg, fill=fillWhite)
+        #draw.text((firstMiddleCol+6,9), game['Period Name'], font=fontMedReg, fill=fillWhite)
     elif game['Period Number'] > 4: # If the game ended in 2OT or later.
         draw.text((firstMiddleCol+3,9), game["Period Name"], font=fontMedReg, fill=fillWhite)
 
