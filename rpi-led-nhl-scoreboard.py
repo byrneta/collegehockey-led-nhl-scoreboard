@@ -1,38 +1,84 @@
 from PIL import Image, ImageDraw, ImageFont
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from datetime import datetime, timezone
+from datetime import datetime, timezone, date
 import requests
 import json
 import time
 import math
 
 def getTeamData():
-    """Get team names and abreviations from the NHL API, return information as a list of dictionaries.
+    """Create team names and abreviations for NCAA Mens Hockey, return information as a list of dictionaries.
 
     Returns:
-        teams (list of dictionaries): Each dict contains the longform name and abbreviation of a single NHL team.
+        teams (list of dictionaries): Each dict contains the longform name and abbreviation of a single NCAA team.
     """
     
-    # Call the NHL Teams API. Store as a JSON object.
-    teamsResponse = requests.get(url="https://statsapi.web.nhl.com/api/v1/teams")
-    teamsJson = teamsResponse.json()
+    teams = [
+        { 'Team Name': "Minnesota Duluth", 'Team Abbreviation': "MN DUL" },
+        { 'Team Name': "Western Michigan", 'Team Abbreviation': "W MICH" },
+        { 'Team Name': "Michigan", 'Team Abbreviation': "MICH" },
+        { 'Team Name': "St. Cloud", 'Team Abbreviation': "SCSU" },
+        { 'Team Name': "Minnesota State", 'Team Abbreviation': "MNSTMA" },
+        { 'Team Name': "Harvard", 'Team Abbreviation': "HARV" },
+        { 'Team Name': "Massachusetts", 'Team Abbreviation': "UMASS" },
+        { 'Team Name': "North Dakota", 'Team Abbreviation': "NO DAK" },
+        { 'Team Name': "Bowling Green", 'Team Abbreviation': "BGSU" },
+        { 'Team Name': "Minnesota", 'Team Abbreviation': "MINN" },
+        { 'Team Name': "Penn State", 'Team Abbreviation': "PENNST" },
+        { 'Team Name': "Ohio State", 'Team Abbreviation': "OHIOST" },
+        { 'Team Name': "Omaha", 'Team Abbreviation': "OMAHA" },
+        { 'Team Name': "Quinnipiac", 'Team Abbreviation': "QUINN" },
+        { 'Team Name': "Michigan Tech", 'Team Abbreviation': "MITECH" },
+        { 'Team Name': "Connecticut", 'Team Abbreviation': "UCONN" },
+        { 'Team Name': "Providence", 'Team Abbreviation': "PROV" },
+        { 'Team Name': "UMass Lowell", 'Team Abbreviation': "UMASSL" },
+        { 'Team Name': "Bemidji State", 'Team Abbreviation': "BEMDJI" },
+        { 'Team Name': "Notre Dame", 'Team Abbreviation': "N DAME" },
+        { 'Team Name': "Michigan State", 'Team Abbreviation': "MICHST" },
+        { 'Team Name': "Lake Superior", 'Team Abbreviation': "LK SUP" },
+        { 'Team Name': "Northeastern", 'Team Abbreviation': "NOEAST" },
+        { 'Team Name': "Wisconsin", 'Team Abbreviation': "WISC" },
+        { 'Team Name': "Rensselaer", 'Team Abbreviation': "RPI" },
+        { 'Team Name': "Cornell", 'Team Abbreviation': "CORN" },
+        { 'Team Name': "Colgate", 'Team Abbreviation': "COLGAT" },
+        { 'Team Name': "Clarkson", 'Team Abbreviation': "CLARKS" },
+        { 'Team Name': "St. Lawrence", 'Team Abbreviation': "ST LAW" },
+        { 'Team Name': "Boston College", 'Team Abbreviation': "BC" },
+        { 'Team Name': "Merrimack", 'Team Abbreviation': "MERMCK" },
+        { 'Team Name': "Bentley", 'Team Abbreviation': "BENTLY" },
+        { 'Team Name': "Canisius", 'Team Abbreviation': "CANISI" },
+        { 'Team Name': "Arizona State", 'Team Abbreviation': "AZ ST" },
+        { 'Team Name': "Northern Michigan", 'Team Abbreviation': "N MICH" },
+        { 'Team Name': "Denver", 'Team Abbreviation': "DENVER" },
+        { 'Team Name': "Ferris State", 'Team Abbreviation': "FERRIS" },
+        { 'Team Name': "RIT", 'Team Abbreviation': "RIT" },
+        { 'Team Name': "AIC", 'Team Abbreviation': "AM INT" },
+        { 'Team Name': "Miami", 'Team Abbreviation': "MIA OH" },
+        { 'Team Name': "Princeton", 'Team Abbreviation': "PRINCE" },
+        { 'Team Name': "Sacred Heart", 'Team Abbreviation': "SACHRT" },
+        { 'Team Name': "Colorado College", 'Team Abbreviation': "CO COL" },
+        { 'Team Name': "Army", 'Team Abbreviation': "ARMY" },
+        { 'Team Name': "Dartmouth", 'Team Abbreviation': "DART" },
+        { 'Team Name': "Mercyhurst", 'Team Abbreviation': "MERCYH" },
+        { 'Team Name': "Alaska", 'Team Abbreviation': "AK FBK" },
+        { 'Team Name': "New Hampshire", 'Team Abbreviation': "UNH" },
+        { 'Team Name': "Union", 'Team Abbreviation': "UNION" },
+        { 'Team Name': "Boston University", 'Team Abbreviation': "BU" },
+        { 'Team Name': "Niagara", 'Team Abbreviation': "NIAGRA" },
+        { 'Team Name': "Holy Cross", 'Team Abbreviation': "HOLYCR" },
+        { 'Team Name': "Air Force", 'Team Abbreviation': "AIRFOR" },
+        { 'Team Name': "LIU", 'Team Abbreviation': "LIU BK" },
+        { 'Team Name': "St. Thomas", 'Team Abbreviation': "STTHOM" },
+        { 'Team Name': "Vermont", 'Team Abbreviation': "VERMNT" },
+        { 'Team Name': "Brown", 'Team Abbreviation': "BROWN" },
+        { 'Team Name': "Maine", 'Team Abbreviation': "MAINE" },
+        { 'Team Name': "Yale", 'Team Abbreviation': "YALE" }
+    ]
 
-    # Decalare an empty list to hold the team dicts.
-    teams = []
-
-    # For each team, build a dict recording it's name and abbreviation. Append this to the end of the teams list.
-    for team in teamsJson['teams']:
-        teamDict = {
-                'Team Name': team['name'],
-                'Team Abbreviation': team['abbreviation']
-        }
-        # Append dict to the end of the teams list.
-        teams.append(teamDict)
-    
     return teams
 
 def getGameData(teams):
-    """Get game data for all of todays games from the NHL API, returns games as a list of dictionaries.
+    """Get game data for all of todays games from the NCAA API, returns games as a list of dictionaries.
 
     Args:
         teams (list of dictionaries): Team names and abberivations. Needed as the game API doen't return team abbreviations.
@@ -40,42 +86,44 @@ def getGameData(teams):
     Returns:
         games (list of dictionaries): All game info needed to display on scoreboard. Teams, scores, start times, game clock, etc.
     """
+    REQUEST_TIMEOUT = 5
+    todays_date = date.today()
+  
+    YEAR = '{:04d}'.format(todays_date.year)
+    MONTH = '{:02d}'.format(todays_date.month)
+    DAY = '{:02d}'.format(todays_date.day)
 
-    # Call the NHL API for today's game info. Save the rsult as a JSON object.
-    gamesResponse = requests.get(url="https://statsapi.web.nhl.com/api/v1/schedule?expand=schedule.linescore")
+    # Call the NCAA API for today's game info. Save the rsult as a JSON object.
+    gamesResponse = requests.get(url="https://data.ncaa.com/casablanca/scoreboard/icehockey-men/d1/"+YEAR+"/"+MONTH+"/"+DAY+"/scoreboard.json", timeout=REQUEST_TIMEOUT)
     gamesJson = gamesResponse.json()
 
     # Decalare an empty list to hold the games dicts.
     games = []
 
     # For each game, build a dict recording it's information. Append this to the end of the teams list.
-    if gamesJson['dates']: # If games today.
-        for game in gamesJson['dates'][0]['games']:
+    if gamesJson['games']: # If games today.
+        for game in gamesJson['games']:
 
             # Prep the period data for consistancy. This data doesn't exist in the API responce until game begins.
-            if 'linescore' in game and 'currentPeriodOrdinal' in game['linescore']:
-                perName = game['linescore']['currentPeriodOrdinal']
-                perTimeRem = game['linescore']['currentPeriodTimeRemaining']
+            if game['game']['gameState'] != "pre":
+                perName = game['game']['currentPeriod']
+                perTimeRem = game['game']['contestClock']
             else:
                 perName = "Not Started"
                 perTimeRem = "Not Started"
 
             # Prep the dict data.
             gameDict = {
-                'Game ID': game['gamePk'],
-                'Home Team': game['teams']['home']['team']['name'],
-                # Since the schedule API doesn't have team abreviatiosn, we'll have to get that from the team dict.
-                'Home Abbreviation': [t['Team Abbreviation'] for t in teams if t['Team Name'] == game['teams']['home']['team']['name']][0],
-                'Away Team': game['teams']['away']['team']['name'],
-                 # Since the schedule API doesn't have team abreviatiosn, we'll have to get that from the team dict.
-                'Away Abbreviation': [t['Team Abbreviation'] for t in teams if t['Team Name'] == game['teams']['away']['team']['name']][0],
-                'Home Score': game['teams']['home']['score'],
-                'Away Score': game['teams']['away']['score'],
-                'Start Time UTC':  datetime.strptime(game['gameDate'], '%Y-%m-%dT%H:%M:%SZ'), # Extracts the startime from what's given by the API.
-                'Start Time Local': utcToLocal(datetime.strptime(game['gameDate'], '%Y-%m-%dT%H:%M:%SZ')), # Converts the UTC start time to the RPi's local timezone.
-                'Status': game['status']['abstractGameState'],
-                'Detailed Status': game['status']['detailedState'],
-                'Period Number': game['linescore']['currentPeriod'],
+                'Game ID': int(game['game']['gameID']),
+                'Home Team': game['game']['home']['names']['short'],
+                'Home Abbreviation': game['game']['home']['names']['char6'],
+                'Away Team': game['game']['away']['names']['short'],
+                'Away Abbreviation': game['game']['away']['names']['char6'],
+                'Home Score': game['game']['home']['score'],
+                'Away Score': game['game']['away']['score'],
+                'Start Time Local': game['game']['startTime'][0:5],
+                'Status': game['game']['gameState'],
+                'Detailed Status': game['game']['finalMessage'],
                 'Period Name': perName,
                 'Period Time Remaining': perTimeRem
             }
@@ -134,10 +182,6 @@ def cropImage(image):
 
     return croppedImage
 
-def utcToLocal(utc_dt):
-    """Returns a time object converted to the local timezone set on the RPi."""
-    return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=None)
-
 def checkGoalScorer(game, gameOld):
     """Checks if a team has scored.
 
@@ -183,8 +227,8 @@ def buildGameNotStarted(game):
 
     # Extract the start time in 12 hour format.
     startTime = game['Start Time Local']
-    startTime = startTime.time().strftime('%I:%M')
-    startTime = str(startTime) # Cast to a string for easier parsing.
+    #startTime = startTime.time().strftime('%I:%M')
+    #startTime = str(startTime) # Cast to a string for easier parsing.
 
     # Add the start time to the image. Adjust placement for times before/after 10pm local time.
     if startTime[0] == "1": # 10pm or later.
@@ -221,7 +265,7 @@ def buildGameInProgress(game, gameOld, scoringTeam):
     displayLogos(game['Away Abbreviation'],game['Home Abbreviation'])
 
     # Add the period to the image.
-    displayPeriod(game['Period Number'], game['Period Name'], game['Period Time Remaining'])
+    displayPeriod(game['Period Name'], game['Period Time Remaining'])
 
     # Add the current score to the image. Note if either team scored.
     displayScore(game['Away Score'], game['Home Score'], scoringTeam)
@@ -270,11 +314,11 @@ def buildGamePostponed(game):
 def buildNoGamesToday():
     """Adds all aspects of the no games today screen to the image object."""
 
-    # Add the NHL logo to the image.
-    nhlLogo = Image.open("assets/images/NHL_Logo_Simplified.png")
-    nhlLogo = cropImage(nhlLogo)
-    nhlLogo.thumbnail((40,30))
-    image.paste(nhlLogo, (1, 1))
+    # Add the NCAA logo to the image.
+    ncaaLogo = Image.open("assets/images/NCAA_Logo_Simplified.png")
+    ncaaLogo = cropImage(ncaaLogo)
+    ncaaLogo.thumbnail((40,30))
+    image.paste(ncaaLogo, (1, 1))
 
     # Add "No Games Today" to the image.
     draw.text((32,0), "No", font=fontMedReg, fill=fillWhite)
@@ -284,11 +328,11 @@ def buildNoGamesToday():
 def buildLoading():
     """Adds all aspects of the loading screen to the image object."""
 
-    # Add the NHL logo to the image.
-    nhlLogo = Image.open("assets/images/NHL_Logo_Simplified.png")
-    nhlLogo = cropImage(nhlLogo)
-    nhlLogo.thumbnail((40,30))
-    image.paste(nhlLogo, (1, 1))
+    # Add the NCAA logo to the image.
+    ncaaLogo = Image.open("assets/images/NCAA_Logo_Simplified.png")
+    ncaaLogo = cropImage(ncaaLogo)
+    ncaaLogo.thumbnail((40,30))
+    image.paste(ncaaLogo, (1, 1))
 
     # Add "Now Loading" to the image.
     draw.text((29,8), "Now", font=fontSmallReg, fill=fillWhite)
@@ -305,15 +349,27 @@ def displayLogos(awayTeam, homeTeam):
     # Difine the max width and height that a logo can be.
     logoSize = (40,30)
 
-    # Load, crop, and resize the away team logo.
-    awayLogo = Image.open("assets/images/team logos/png/" + awayTeam + ".png")
-    awayLogo = cropImage(awayLogo)
-    awayLogo.thumbnail(logoSize)
+    if not any(d['Team Abbreviation'] == awayTeam for d in getTeamData()):
+        # Load, crop, and resize the away team logo.
+        awayLogo = Image.open("assets/images/team logos/png/NCAA.png")
+        awayLogo = cropImage(awayLogo)
+        awayLogo.thumbnail(logoSize)
+    else:
+        # Load, crop, and resize the away team logo.
+        awayLogo = Image.open("assets/images/team logos/png/" + awayTeam + ".png")
+        awayLogo = cropImage(awayLogo)
+        awayLogo.thumbnail(logoSize)
 
-    # Load, crop, and resize the home team logo.
-    homeLogo = Image.open("assets/images/team logos/png/" + homeTeam + ".png")
-    homeLogo = cropImage(homeLogo)
-    homeLogo.thumbnail(logoSize)
+    if not any(d['Team Abbreviation'] == homeTeam for d in getTeamData()):
+        # Load, crop, and resize the home team logo.
+        homeLogo = Image.open("assets/images/team logos/png/NCAA.png")
+        homeLogo = cropImage(homeLogo)
+        homeLogo.thumbnail(logoSize)
+    else:
+        # Load, crop, and resize the home team logo.
+        homeLogo = Image.open("assets/images/team logos/png/" + homeTeam + ".png")
+        homeLogo = cropImage(homeLogo)
+        homeLogo.thumbnail(logoSize)
 
     # Record the width and heights of the logos.
     awayLogoWidth, awayLogoHeight = awayLogo.size
@@ -324,29 +380,28 @@ def displayLogos(awayTeam, homeTeam):
     image.paste(awayLogo, (21-awayLogoWidth, math.floor((32-awayLogoHeight)/2)))
     image.paste(homeLogo, (43, math.floor((32-homeLogoHeight)/2)))
 
-def displayPeriod(periodNumber, periodName, timeRemaining):
+def displayPeriod(periodName, timeRemaining):
     """Adds the current period to the image object.
 
     Args:
-        periodNumber (int): [description]
         periodName (string): [description]
         timeRemaining (string): [description]
     """
 
     # If the first period, add "1st" to the image.
-    if periodNumber == 1:
+    if periodName == "1ST":
         draw.text((firstMiddleCol+5,0), "1", font=fontMedReg, fill=fillWhite)
         draw.text((firstMiddleCol+9,0), "s", font=fontSmallReg, fill=fillWhite)
         draw.text((firstMiddleCol+13,0), "t", font=fontSmallReg, fill=fillWhite)
 
     # If the second period, add "2nd" to the image.
-    elif periodNumber == 2:
+    elif periodName == "2ND":
         draw.text((firstMiddleCol+4,0), "2", font=fontMedReg, fill=fillWhite)
         draw.text((firstMiddleCol+10,0), "n", font=fontSmallReg, fill=fillWhite)
         draw.text((firstMiddleCol+14,0), "d", font=fontSmallReg, fill=fillWhite)
 
     # If the third period, add "3rd" to the image.
-    elif periodNumber == 3:
+    elif periodName == "3RD":
         draw.text((firstMiddleCol+4,0), "3", font=fontMedReg, fill=fillWhite)
         draw.text((firstMiddleCol+10,0), "r", font=fontSmallReg, fill=fillWhite)
         draw.text((firstMiddleCol+14,0), "d", font=fontSmallReg, fill=fillWhite)
@@ -361,7 +416,7 @@ def displayPeriod(periodNumber, periodName, timeRemaining):
 
     # If not in the SO, and the period not over, add the time remaining in the period to the image.
     if periodName != "SO":
-        if timeRemaining != "END":
+        if timeRemaining != "0:00":
             displayTimeRemaing(timeRemaining) # Adds the time remaining in the period to the image.
 
         # If not in the SO and the time remaining is "END", then we know that we're in intermission. Don't add time remaininig to the image.
@@ -494,7 +549,7 @@ def runScoreboard():
             networkError = False
             break
 
-        # In the event that the NHL API cannot be reached, set the bottom right LED to red.
+        # In the event that the NCAA API cannot be reached, set the bottom right LED to red.
         # TODO: Make this more robust for specific fail cases.
         except:
             networkError = True
