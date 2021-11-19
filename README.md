@@ -1,10 +1,8 @@
-# Raspberry Pi LED Matrix NHL Scoreboard
-Display live NHL game scores, start times, etc. on a LED matrix driven by a Raspberry Pi. Makes use of the unofficial [NHL API](https://gitlab.com/dword4/nhlapi/-/blob/master/stats-api.md) for all game information.
+# Raspberry Pi LED Matrix NCAA Hockey Scoreboard
 
-Check out the accompanying [blog post](https://gidge.dev/nhl%20scoreboard/nhl-scoreboard/) for more info and examples.
+Work in progress fork of the awesome [rpi-led-nhl-scoreboard](https://github.com/gidger/rpi-led-nhl-scoreboard) which was inspired by [nhl-led-scoreboard](https://github.com/riffnshred/nhl-led-scoreboard).
 
-![Example](https://github.com/gidger/rpi-led-nhl-scoreboard/blob/8dcf3104e2d6d7a9a0412b74bff32985df2af1f0/examples/demo.gif)
-
+Display live NCAA game scores, start times, etc. on a LED matrix driven by a Raspberry Pi. Makes use of the unofficial NCAA API for all game information.
 
 ## Installation Instructions
 These instructitons assume some basic knowledge of Unix and how to edit files via the command line.
@@ -25,7 +23,7 @@ These instructitons assume some basic knowledge of Unix and how to edit files vi
 
     Add the following to wpa_supplicant.conf using your text editor of choice. Configure the network information and two didgit [country code](https://www.iban.com/country-codes) as per your needs.
     ```
-    country=CA
+    country=US
     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
     update_config=1
 
