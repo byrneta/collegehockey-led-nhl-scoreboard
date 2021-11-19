@@ -633,7 +633,7 @@ def runScoreboard():
                     buildGameNotStarted(game)
 
                 # If the game is over, build the final score screen.
-                elif game['Status'] == "Final":
+                elif game['Status'] == "final":
                     buildGameOver(game, scoringTeam)
                 
                 # Otherwise, the game is in progress. Build the game in progress screen.
