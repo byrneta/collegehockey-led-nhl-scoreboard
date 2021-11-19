@@ -619,7 +619,7 @@ def runScoreboard():
                     buildGamePostponed(game)
 
                 # If the game has yet to begin, build the game not started screen.
-                elif game['Status'] == "Preview":
+                elif game['Status'] == "pre":
                     buildGameNotStarted(game)
 
                 # If the game is over, build the final score screen.
