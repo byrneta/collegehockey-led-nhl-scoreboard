@@ -78,7 +78,7 @@ These instructitons assume some basic knowledge of Unix and how to edit files vi
 
 12. Copy this repository.
     ```bash
-    git clone --recursive https://github.com/gidger/rpi-led-nhl-scoreboard.git
+    git clone --recursive https://github.com/byrneta/collegehockey-led-scoreboard.git
     ```
 
 13. Install the LED Matrix Python package. Navagate to the root directory of the matrix library (/submodules/rpi-rgb-led-matrix @ dfc27c1) and enter the following commands.
@@ -104,11 +104,11 @@ These instructitons assume some basic knowledge of Unix and how to edit files vi
     Copy-paste the following:
     ```
     #!/bin/bash
-    cd /home/pi/rpi-led-nhl-scoreboard
+    cd /home/pi/collegehockey-led-scoreboard
     n=0
     until [ $n -ge 10 ]
     do
-       sudo python3 rpi-led-nhl-scoreboard.py  && break
+       sudo python3 collegehockey-led-scoreboard.py  && break
        n=$[$n+1]
        sleep 10
     done
