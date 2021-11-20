@@ -6,6 +6,11 @@ Display live NCAA game scores, start times, etc. on a LED matrix driven by a Ras
 
 ![Example](https://github.com/byrneta/collegehockey-led-scoreboard/blob/main/examples/demo.jpeg)
 
+## To-Do
+1. Emphasize game winner (especially shoot out winners)
+2. Cleanup logos
+3. Miscellaneous API fixes 
+
 ## Installation Instructions
 These instructions assume some basic knowledge of Unix and how to edit files via the command line.
 1. Flash an SD card with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/) on your personal computer.
@@ -78,13 +83,17 @@ These instructions assume some basic knowledge of Unix and how to edit files via
     sudo apt-get install git -y
     ```
 
-12. Copy this repository.
+12. Copy this repository to your home directory.
     ```bash
+    cd ~/
+
     git clone --recursive https://github.com/byrneta/collegehockey-led-scoreboard.git
     ```
 
 13. Install the LED Matrix Python package. Navigate to the root directory of the matrix library (/submodules/rpi-rgb-led-matrix @ dfc27c1) and enter the following commands.
     ```bash
+    cd ~/collegehockey-led-scoreboard/submodules/rpi-rgb-led-matrix
+
     sudo apt-get update && sudo apt-get install python3-dev python3-pillow -y
 
     make build-python PYTHON=$(which python3)
@@ -95,6 +104,8 @@ These instructions assume some basic knowledge of Unix and how to edit files via
 14. Install any missing requirements. Return to the root of your clone of this repository and enter the following command.
 
     ```bash
+    cd ~/collegehockey-led-scoreboard
+
     pip3 install -r requirements.txt
     ```
 
