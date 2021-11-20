@@ -10,7 +10,7 @@ Display live NCAA game scores, start times, etc. on a LED matrix driven by a Ras
 1. Emphasize game winner (especially shoot out winners)
 2. Cleanup logos
 3. Miscellaneous API fixes
-4. Add logic for day transitions (show last nights game in the morning, transition to today's game later) 
+4. Add logic for day transitions (show last nights game in the morning, transition to today's games later) 
 
 ## Installation Instructions
 These instructions assume some basic knowledge of Unix and how to edit files via the command line.
