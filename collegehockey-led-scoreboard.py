@@ -233,14 +233,13 @@ def buildGameNotStarted(game):
 
     # Add the start time to the image. Adjust placement for times before/after 10pm local time.
     if len(startTime) == 0:
-        #draw.text((firstMiddleCol+3,22), "?", font=fontSmallReg, fill=fillWhite)
+        draw.text((firstMiddleCol+3,22), "TBA", font=fontSmallReg, fill=fillWhite)
         # Colon (manual dots since the font's colon looks funny).
         #draw.rectangle(((firstMiddleCol+8,25),(firstMiddleCol+8,25)), fill=fillWhite)
         #draw.rectangle(((firstMiddleCol+8,27),(firstMiddleCol+8,27)), fill=fillWhite)
         # Minutes.
         #draw.text((firstMiddleCol+10,22), "?", font=fontSmallReg, fill=fillWhite)
-        #draw.text((firstMiddleCol+15,22), "?", font=fontSmallReg, fill=fillWhite)      
-
+        #draw.text((firstMiddleCol+15,22), "?", font=fontSmallReg, fill=fillWhite)
 
     elif startTime[0] == "1": # 10pm or later.
         # Add "@" to the image.
