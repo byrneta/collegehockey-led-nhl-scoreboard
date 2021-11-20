@@ -493,14 +493,13 @@ def displayTimeRemaing(timeRemaining):
     # Otherwise, time is less than 10 minutes. Add the time to the image with spacing for a single digit minute.
     else:
         # Minutes.
-        draw.text((firstMiddleCol+3,9), timeRemaining[1], font=fontSmallReg, fill=fillWhite)
+        draw.text((firstMiddleCol+3,9), timeRemaining[0], font=fontSmallReg, fill=fillWhite)
         # Colon.
         draw.rectangle(((firstMiddleCol+8,12),(firstMiddleCol+8,12)), fill=fillWhite)
         draw.rectangle(((firstMiddleCol+8,14),(firstMiddleCol+8,14)), fill=fillWhite)
         # Seconds.
-        print(timeRemaining)
-        draw.text((firstMiddleCol+10,9), timeRemaining[3], font=fontSmallReg, fill=fillWhite)
-        draw.text((firstMiddleCol+15,9), timeRemaining[4], font=fontSmallReg, fill=fillWhite)
+        draw.text((firstMiddleCol+10,9), timeRemaining[2], font=fontSmallReg, fill=fillWhite)
+        draw.text((firstMiddleCol+15,9), timeRemaining[3], font=fontSmallReg, fill=fillWhite)
 
 def displayScore(awayScore, homeScore, scoringTeam = "none"):
     """Add the score for both teams to the image object.
