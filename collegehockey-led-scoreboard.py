@@ -224,7 +224,7 @@ def buildGameNotStarted(game):
     draw.text((firstMiddleCol+17,2), "y", font=fontSmallReg, fill=fillWhite)
 
     # Add "@" to the image.
-    draw.text((firstMiddleCol+6,8), "@", font=fontLargeReg, fill=fillWhite)
+    #draw.text((firstMiddleCol+6,8), "@", font=fontLargeReg, fill=fillWhite)
 
     # Extract the start time in 12 hour format.
     startTime = game['Start Time Local']
@@ -233,16 +233,19 @@ def buildGameNotStarted(game):
 
     # Add the start time to the image. Adjust placement for times before/after 10pm local time.
     if len(startTime) == 0:
-        draw.text((firstMiddleCol+3,22), "?", font=fontSmallReg, fill=fillWhite)
+        #draw.text((firstMiddleCol+3,22), "?", font=fontSmallReg, fill=fillWhite)
         # Colon (manual dots since the font's colon looks funny).
-        draw.rectangle(((firstMiddleCol+8,25),(firstMiddleCol+8,25)), fill=fillWhite)
-        draw.rectangle(((firstMiddleCol+8,27),(firstMiddleCol+8,27)), fill=fillWhite)
+        #draw.rectangle(((firstMiddleCol+8,25),(firstMiddleCol+8,25)), fill=fillWhite)
+        #draw.rectangle(((firstMiddleCol+8,27),(firstMiddleCol+8,27)), fill=fillWhite)
         # Minutes.
-        draw.text((firstMiddleCol+10,22), "?", font=fontSmallReg, fill=fillWhite)
-        draw.text((firstMiddleCol+15,22), "?", font=fontSmallReg, fill=fillWhite)      
+        #draw.text((firstMiddleCol+10,22), "?", font=fontSmallReg, fill=fillWhite)
+        #draw.text((firstMiddleCol+15,22), "?", font=fontSmallReg, fill=fillWhite)      
 
 
     elif startTime[0] == "1": # 10pm or later.
+        # Add "@" to the image.
+        draw.text((firstMiddleCol+6,8), "@", font=fontLargeReg, fill=fillWhite)
+
         # Hour.
         draw.text((firstMiddleCol,22), startTime[0], font=fontSmallReg, fill=fillWhite)
         draw.text((firstMiddleCol+5,22), startTime[1], font=fontSmallReg, fill=fillWhite)
@@ -254,6 +257,9 @@ def buildGameNotStarted(game):
         draw.text((firstMiddleCol+17,22), startTime[4], font=fontSmallReg, fill=fillWhite)
 
     else: # 9pm or earlier.
+        # Add "@" to the image.
+        draw.text((firstMiddleCol+6,8), "@", font=fontLargeReg, fill=fillWhite)
+
         # Hour.
         draw.text((firstMiddleCol+3,22), startTime[1], font=fontSmallReg, fill=fillWhite)
         # Colon (manual dots since the font's colon looks funny).
