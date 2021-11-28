@@ -68,7 +68,7 @@ def getTeamData():
         { 'Team Name': "Niagara", 'Team Abbreviation': "NIAGRA" },
         { 'Team Name': "Holy Cross", 'Team Abbreviation': "HOLYCR" },
         { 'Team Name': "Air Force", 'Team Abbreviation': "AIRFOR" },
-        { 'Team Name': "LIU", 'Team Abbreviation': "LIU BK" },
+        { 'Team Name': "LIU", 'Team Abbreviation': "LIU" },
         { 'Team Name': "St. Thomas", 'Team Abbreviation': "STTHOM" },
         { 'Team Name': "Vermont", 'Team Abbreviation': "VERMNT" },
         { 'Team Name': "Brown", 'Team Abbreviation': "BROWN" },
@@ -126,7 +126,9 @@ def getGameData(teams):
                 'Status': game['game']['gameState'],
                 'Detailed Status': game['game']['finalMessage'],
                 'Period Name': perName,
-                'Period Time Remaining': perTimeRem
+                'Period Time Remaining': perTimeRem,
+                'Home Winner': json.dumps(game['game']['home']['winner']),
+                'Away Winner': json.dumps(game['game']['away']['winner'])
             }
 
             # Append the dict to the games list.
@@ -205,6 +207,27 @@ def checkGoalScorer(game, gameOld):
         scoringTeam = "none"
 
     return scoringTeam
+
+def checkGameWinner(game):
+    """Checks which team has won.
+
+    Args:
+        game (dict): All information for a specific game.
+
+    Returns:
+        winningTeam (string): If the home team, away team, or neither won.
+    """
+
+    # Check if either team has score by compare the score of the last cycle. Set scoringTeam accordingly.
+    if game['Home Winner'] == 'true' and game['Away Winner'] == 'false':
+        winningTeam = "home"
+    elif game['Home Winner'] == 'false' and game['Away Winner'] == 'true':
+        winningTeam = "away"
+    else:
+        winningTeam = "none"
+
+    return winningTeam
+
 
 def buildGameNotStarted(game):
     """Adds all aspects of the game not started screen to the image object.
@@ -286,12 +309,12 @@ def buildGameInProgress(game, gameOld, scoringTeam):
     # Add the current score to the image. Note if either team scored.
     displayScore(game['Away Score'], game['Home Score'], scoringTeam)
 
-def buildGameOver(game, scoringTeam):
+def buildGameOver(game, winningTeam):
     """Adds all aspects of the game over screen to the image object.
 
     Args:
         game (dict): All information for a specific game.
-        scoringTeam (string): If the home team, away team, or both, or neither scored.
+        winningTeam (string): If the home team, away team, or neither won.
     """
 
     # Add the logos of the teams involved to the image.
@@ -315,7 +338,7 @@ def buildGameOver(game, scoringTeam):
     #    draw.text((firstMiddleCol+3,9), game["Period Name"], font=fontMedReg, fill=fillWhite)
 
     # Add the current score to the image.
-    displayScore(game['Away Score'],game['Home Score'], scoringTeam)
+    displayScore(game['Away Score'],game['Home Score'], winningTeam)
 
 def buildGamePostponed(game):
     """Adds all aspects of the postponed screen to the image object.
@@ -632,6 +655,9 @@ def runScoreboard():
                 # Check if either team has scored.
                 scoringTeam = checkGoalScorer(game, gameOld)
 
+                # Check if either team has won.
+                winningTeam = checkGameWinner(game)
+
                 # If the game is postponed, build the postponed screen.
                 if game['Detailed Status'] == "Postponed":
                     buildGamePostponed(game)
@@ -642,7 +668,7 @@ def runScoreboard():
 
                 # If the game is over, build the final score screen.
                 elif game['Status'] == "final":
-                    buildGameOver(game, scoringTeam)
+                    buildGameOver(game, winningTeam)
                 
                 # Otherwise, the game is in progress. Build the game in progress screen.
                 # If the home or away team has scored, take note of that.
