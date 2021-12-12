@@ -90,7 +90,7 @@ These instructions assume some basic knowledge of Unix and how to edit files via
     git clone --recursive https://github.com/byrneta/collegehockey-led-scoreboard.git
     ```
 
-13. Install the LED Matrix Python package. Navigate to the root directory of the matrix library (/submodules/rpi-rgb-led-matrix @ dfc27c1) and enter the following commands.
+13. Install the LED Matrix Python package. Navagate to the root directory of the matrix library (/submodules/rpi-rgb-led-matrix) and enter the following commands.
     ```bash
     cd ~/collegehockey-led-scoreboard/submodules/rpi-rgb-led-matrix
 
