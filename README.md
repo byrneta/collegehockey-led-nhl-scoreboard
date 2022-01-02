@@ -7,9 +7,12 @@ Display live NCAA game scores, start times, etc. on a LED matrix driven by a Ras
 ![Example](https://github.com/byrneta/collegehockey-led-scoreboard/blob/main/examples/demo.jpeg)
 
 ## To-Do
-1. Cleanup logos
-2. Miscellaneous API fixes
+1. Miscellaneous API fixes
+2. Scoreboard layout tweaks
 3. Add logic for day transitions (show last nights game in the morning, transition to today's games later) 
+
+## Notes
+1. Division II/III/other exhibition opponents will appear as the NCAA logo
 
 ## Installation Instructions
 These instructions assume some basic knowledge of Unix and how to edit files via the command line.

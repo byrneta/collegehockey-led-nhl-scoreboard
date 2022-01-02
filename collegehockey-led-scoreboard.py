@@ -8,7 +8,7 @@ import math
 import os.path
 
 def getTeamData():
-    """Create team names and abreviations for NCAA Mens Hockey, return information as a list of dictionaries.
+    """Create team names and abbreviations for NCAA Mens Hockey, return information as a list of dictionaries.
 
     Returns:
         teams (list of dictionaries): Each dict contains the longform name and abbreviation of a single NCAA team.
@@ -79,10 +79,10 @@ def getTeamData():
     return teams
 
 def getGameData(teams):
-    """Get game data for all of todays games from the NCAA API, returns games as a list of dictionaries.
+    """Get game data for all of today's games from the NCAA API, returns games as a list of dictionaries.
 
     Args:
-        teams (list of dictionaries): Team names and abberivations. Needed as the game API doen't return team abbreviations.
+        teams (list of dictionaries): Team names and abbreviations. Needed as the game API doesn't return team abbreviations.
 
     Returns:
         games (list of dictionaries): All game info needed to display on scoreboard. Teams, scores, start times, game clock, etc.
@@ -94,18 +94,18 @@ def getGameData(teams):
     MONTH = '{:02d}'.format(todays_date.month)
     DAY = '{:02d}'.format(todays_date.day)
 
-    # Call the NCAA API for today's game info. Save the rsult as a JSON object.
+    # Call the NCAA API for today's game info. Save the result as a JSON object.
     gamesResponse = requests.get(url="https://data.ncaa.com/casablanca/scoreboard/icehockey-men/d1/"+YEAR+"/"+MONTH+"/"+DAY+"/scoreboard.json", timeout=REQUEST_TIMEOUT)
     gamesJson = gamesResponse.json()
 
-    # Decalare an empty list to hold the games dicts.
+    # Declare an empty list to hold the games dicts.
     games = []
 
     # For each game, build a dict recording it's information. Append this to the end of the teams list.
     if gamesJson['games']: # If games today.
         for game in gamesJson['games']:
 
-            # Prep the period data for consistancy. This data doesn't exist in the API responce until game begins.
+            # Prep the period data for consistency. This data doesn't exist in the API response until game begins.
             if game['game']['gameState'] != "pre":
                 perName = game['game']['currentPeriod']
                 perTimeRem = game['game']['contestClock']
@@ -134,12 +134,12 @@ def getGameData(teams):
             # Append the dict to the games list.
             games.append(gameDict)
 
-            # Sort list by Game ID. Ensures order doesn't cahnge as games end.
+            # Sort list by Game ID. Ensures order doesn't change as games end.
             games.sort(key=lambda x:x['Game ID'])
     return games
 
 def getMaxBrightness(time):
-    """ Calculates the maximum brightness and fade step incremements based on the time of day.
+    """ Calculates the maximum brightness and fade step increments based on the time of day.
 
     Args:
         time (int): Hour of the day. Can be 0-23.
@@ -153,11 +153,11 @@ def getMaxBrightness(time):
     if time == 0:
         time = 1
 
-    # Max brihgtness is the time divided by 12 and multiplied by 100. For pm times, the difference between 24 and the time is used.
+    # Max brightness is the time divided by 12 and multiplied by 100. For pm times, the difference between 24 and the time is used.
     # This means that max brightness is at noon, with the lowest from 11pm through 1am (because of the above edge case).
     maxBrightness = math.ceil(100 * time / 12 if time <= 12 else 100 * (24-time)/12)
     
-    # If the previous calculation results in a birhgtness less than 15, set brightnes to 15.
+    # If the previous calculation results in a brightness less than 15, set brightness to 15.
     maxBrightness = maxBrightness if maxBrightness >= 15 else 15
 
     # Fade step divides the maxBrightness into 15 segments. Floor since you can't have fractional brightness.
@@ -168,7 +168,7 @@ def getMaxBrightness(time):
 def cropImage(image):
     """Crops all transparent space around an image. Returns that cropped image."""
 
-    # Get the bounding box of the image. Aka, boundries of what's non-transparent.
+    # Get the bounding box of the image. Aka, boundaries of what's non-transparent.
     bbox = image.getbbox()
 
     # Crop the image to the contents of the bounding box.
@@ -236,7 +236,7 @@ def buildGameNotStarted(game):
         game (dict): All information for a specific game.
     """
 
-    # Add the logos of the teams inivolved to the image.
+    # Add the logos of the teams involved to the image.
     displayLogos(game['Away Abbreviation'],game['Home Abbreviation'])
 
     # Add "Today" to the image.
@@ -300,7 +300,7 @@ def buildGameInProgress(game, gameOld, scoringTeam):
         scoringTeam (string): If the home team, away team, or both, or neither scored.
     """
 
-    # Add the logos of the teams inivolved to the image.
+    # Add the logos of the teams involved to the image.
     displayLogos(game['Away Abbreviation'],game['Home Abbreviation'])
 
     # Add the period to the image.
@@ -388,7 +388,7 @@ def displayLogos(awayTeam, homeTeam):
         homeTeam (string): Abbreviation of the home team.
     """
 
-    # Difine the max width and height that a logo can be.
+    # Define the max width and height that a logo can be.
     logoSize = (40,30)
 
     if os.path.exists("assets/images/team logos/png/" + awayTeam + ".png"):
@@ -483,12 +483,12 @@ def displayPeriod(periodName, timeRemaining):
         if timeRemaining != "0:00":
             displayTimeRemaing(timeRemaining) # Adds the time remaining in the period to the image.
 
-        # If not in the SO and the time remaining is "END", then we know that we're in intermission. Don't add time remaininig to the image.
+        # If not in the SO and the time remaining is "END", then we know that we're in intermission. Don't add time remaining to the image.
         else:
             draw.text((firstMiddleCol+2,8), "INT", font=fontMedReg, fill=fillWhite)
 
 def displayTimeRemaing(timeRemaining):
-    """Adds the remaining time in the period to the image. Takes into account diffent widths of time remaining.
+    """Adds the remaining time in the period to the image. Takes into account different widths of time remaining.
 
     Args:
         timeRemaining (string): The time remaining in the period in "MM:SS" format. For times less than 10 minutes, the minutes should have a leading zero (e.g 09:59).
@@ -538,7 +538,7 @@ def displayScore(awayScore, homeScore, scoringTeam = "none"):
         scoringTeam (str, optional): The team that scored if applicable. Options: "away", "home", "both", "none". Defaults to "none".
     """
 
-    # Add the hypen to the image.
+    # Add the hyphen to the image.
     draw.text((firstMiddleCol+9,20), "-", font=fontSmallBold, fill=fillWhite)
 
     # If no team scored, add both scores to the image.
@@ -546,7 +546,7 @@ def displayScore(awayScore, homeScore, scoringTeam = "none"):
         draw.text((firstMiddleCol+1,17), str(awayScore), font=fontLargeBold, fill=fillWhite)
         draw.text((firstMiddleCol+13,17), str(homeScore), font=fontLargeBold, fill=(fillWhite))
     
-    # If either or both of the teams scored, add that number to the immage in red.
+    # If either or both of the teams scored, add that number to the image in red.
     elif scoringTeam == "away":
         draw.text((firstMiddleCol+1,17), str(awayScore), font=fontLargeBold, fill=fillRed)
         draw.text((firstMiddleCol+13,17), str(homeScore), font=fontLargeBold, fill=fillWhite)
@@ -592,7 +592,7 @@ def displayGoalFade(score, location, secondScore = "", secondLocation = (0,0), b
             time.sleep(.015)
 
 def runScoreboard():
-    """Runs the scoreboard geting scores and other game data and cycles through them in an infinite loop."""
+    """Runs the scoreboard getting scores and other game data and cycles through them in an infinite loop."""
 
     # Initial calculation and setting of the max brightness.
     maxBrightness, fadeStep = getMaxBrightness(int(datetime.now().strftime("%H")))
@@ -622,7 +622,7 @@ def runScoreboard():
                 matrix.SetImage(image)
             time.sleep(1)
 
-    # Wait one extra second on the loading screen. Users thoguht it was too quick.
+    # Wait one extra second on the loading screen. Users thought it was too quick.
     time.sleep(1)
 
     # Fade out.
@@ -631,7 +631,7 @@ def runScoreboard():
         matrix.SetImage(image)
         time.sleep(.025)
 
-    # "Wipe" the image by writing over the entirity with a black rectangle.
+    # "Wipe" the image by writing over the entirety with a black rectangle.
     draw.rectangle(((0,0),(63,31)), fill=fillBlack)
     matrix.SetImage(image)
 
@@ -659,7 +659,7 @@ def runScoreboard():
                 winningTeam = checkGameWinner(game)
 
                 # If the game is postponed, build the postponed screen.
-                if game['Detailed Status'] == "Postponed":
+                if game['Status'] == "postponed":
                     buildGamePostponed(game)
 
                 # If the game has yet to begin, build the game not started screen.
@@ -706,7 +706,7 @@ def runScoreboard():
                 draw.rectangle(((0,0),(63,31)), fill=fillBlack) 
                 matrix.SetImage(image)
 
-        # If there's no games, build the no games today sceen, then wait 10 minutes before checking again.
+        # If there's no games, build the no games today screen, then wait 10 minutes before checking again.
         else:
             buildNoGamesToday()
             matrix.brightness = maxBrightness
@@ -727,7 +727,7 @@ def runScoreboard():
 if __name__ == "__main__":
 
     # This creates the options, matrix, and image objects, as well as some globals that will be needed throughout the code.
-    # Note a huge fan of the ammount of globals, but they work fine in a small scope project like this.
+    # Note a huge fan of the amount of globals, but they work fine in a small scope project like this.
 
     # Configure options for the matrix
     options = RGBMatrixOptions()
@@ -755,7 +755,7 @@ if __name__ == "__main__":
     fontLargeReg = ImageFont.load("assets/fonts/PIL/Tamzen8x15r.pil")
     fontLargeBold = ImageFont.load("assets/fonts/PIL/Tamzen8x15b.pil")
 
-    # Declare text colours that are needed.
+    # Declare text colors that are needed.
     fillWhite = 255,255,255,255
     fillBlack = 0,0,0,255
     fillRed = 255,50,50,255
