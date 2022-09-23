@@ -73,7 +73,9 @@ def getTeamData():
         { 'Team Name': "Vermont", 'Team Abbreviation': "VERMNT" },
         { 'Team Name': "Brown", 'Team Abbreviation': "BROWN" },
         { 'Team Name': "Maine", 'Team Abbreviation': "MAINE" },
-        { 'Team Name': "Yale", 'Team Abbreviation': "YALE" }
+        { 'Team Name': "Yale", 'Team Abbreviation': "YALE" },
+        { 'Team Name': "Alaska Anchorage", 'Team Abbreviation': "AK ANC" },
+        { 'Team Name': "Lindenwood", 'Team Abbreviation': "LINWOD" }
     ]
 
     return teams
