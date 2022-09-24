@@ -8,75 +8,75 @@ import math
 import os.path
 
 def getTeamData():
-    """Create team names and abbreviations for NCAA Mens Hockey, return information as a list of dictionaries.
+    """Create team names and abbreviations for NCAA Mens Hockey, return information as a dictionary.
 
     Returns:
-        teams (list of dictionaries): Each dict contains the longform name and abbreviation of a single NCAA team.
+        teams (dictionary): Contains the char6 name and three letter abbreviation of each NCAA team.
     """
     
-    teams = [
-        { 'AM INT' : "AIC" },
-        { 'AIRFOR' : "AFA" },
-        { 'AK ANC' : "AKA" },
-        { 'AK FBK' : "AKF" },
-        { 'AZ ST' : "ASU" },
-        { 'ARMY' : "ARM" },
-        { 'BEMDJI' : "BMJ" },
-        { 'BENTLY' : "BEN" },
-        { 'BC' : "BC" },
-        { 'BU' : "BU" },
-        { 'BGSU' : "BGS" },
-        { 'BROWN': "BRN" },
-        { 'CANISI' : "CNS" },
-        { 'CLARKS' : "CLK" },
-        { 'COLGAT' : "CLG" },
-        { 'CO COL' : "CC" },
-        { 'UCONN' : "CON" },
-        { 'CORN' : "COR" },
-        { 'DART' : "DAR" },
-        { 'DENVER' : "DEN" },
-        { 'FERRIS' : "FSU" },
-        { 'HARV' : "HAR" },
-        { 'HOLYCR' : "HCR" },
-        { 'LK SUP' : "LSS" },
-        { 'LINWOD' : "LIN" },
-        { 'LIU': "LIU" },
-        { 'MAINE' : "MNE" },
-        { 'UMASS' : "UMA" },
-        { 'MERCYH' : "MRC" },
-        { 'MERMCK' : "MER" },
-        { 'MIA OH' : "MIA" },
-        { 'MICHST' : "MSU" },
-        { 'MITECH' : "MTU" },
-        { 'MICH' : "MIC" },
-        { 'MN DUL' : "MND" },
-        { 'MNSTMA' : "MNS" },
-        { 'MINN' : "MIN" },
-        { 'UNH' : "UNH" },
-        { 'NIAGRA' : "NIA" },
-        { 'NO DAK' : "NDK" },
-        { 'NOEAST' : "NOE" },
-        { 'N MICH' : "NMU" },
-        { 'N DAME' : "NDM" },
-        { 'OHIOST' : "OSU" },
-        { 'OMAHA' : "UNO" },
-        { 'PENNST' : "PSU" },
-        { 'PRINCE' : "PRI" },
-        { 'PROV' : "PRV" },
-        { 'QUINN' : "QUI" },
-        { 'RPI' : "REN" },
-        { 'RIT' : "RIT" },
-        { 'SACHRT' : "SAC" },
-        { 'SCSU' : "STC" },
-        { 'ST LAW' : "STL" },
-        { 'STTHOM' : "STT" },
-        { 'UMASSL' : "UML" },
-        { 'UNION' : "UNI" },
-        { 'VERMNT' : "VER" },
-        { 'W MICH' : "WMU" },
-        { 'WISC' : "WIS" },
-        { 'YALE' : "YLE" }
-    ]
+    teams = {
+        'AM INT' : "AIC" ,
+        'AIRFOR' : "AFA" ,
+        'AK ANC' : "AKA" ,
+        'AK FBK' : "AKF" ,
+        'AZ ST' : "ASU" ,
+        'ARMY' : "ARM" ,
+        'BEMDJI' : "BMJ" ,
+        'BENTLY' : "BEN" ,
+        'BC' : "BC" ,
+        'BU' : "BU" ,
+        'BGSU' : "BGS" ,
+        'BROWN': "BRN" ,
+        'CANISI' : "CNS" ,
+        'CLARKS' : "CLK" ,
+        'COLGAT' : "CLG" ,
+        'CO COL' : "CC" ,
+        'UCONN' : "CON" ,
+        'CORN' : "COR" ,
+        'DART' : "DAR" ,
+        'DENVER' : "DEN" ,
+        'FERRIS' : "FSU" ,
+        'HARV' : "HAR" ,
+        'HOLYCR' : "HCR" ,
+        'LK SUP' : "LSS" ,
+        'LINWOD' : "LIN" ,
+        'LIU': "LIU" ,
+        'MAINE' : "MNE" ,
+        'UMASS' : "UMA" ,
+        'MERCYH' : "MRC" ,
+        'MERMCK' : "MER" ,
+        'MIA OH' : "MIA" ,
+        'MICHST' : "MSU" ,
+        'MITECH' : "MTU" ,
+        'MICH' : "MIC" ,
+        'MN DUL' : "MND" ,
+        'MNSTMA' : "MNS" ,
+        'MINN' : "MIN" ,
+        'UNH' : "UNH" ,
+        'NIAGRA' : "NIA" ,
+        'NO DAK' : "NDK" ,
+        'NOEAST' : "NOE" ,
+        'N MICH' : "NMU" ,
+        'N DAME' : "NDM" ,
+        'OHIOST' : "OSU" ,
+        'OMAHA' : "UNO" ,
+        'PENNST' : "PSU" ,
+        'PRINCE' : "PRI" ,
+        'PROV' : "PRV" ,
+        'QUINN' : "QUI" ,
+        'RPI' : "REN" ,
+        'RIT' : "RIT" ,
+        'SACHRT' : "SAC" ,
+        'SCSU' : "STC" ,
+        'ST LAW' : "STL" ,
+        'STTHOM' : "STT" ,
+        'UMASSL' : "UML" ,
+        'UNION' : "UNI" ,
+        'VERMNT' : "VER" ,
+        'W MICH' : "WMU" ,
+        'WISC' : "WIS" ,
+        'YALE' : "YLE" 
+    }
 
     return teams
 
@@ -262,7 +262,7 @@ def buildGameNotStarted(game):
     #startTime = str(startTime) # Cast to a string for easier parsing.
 
     # Add the start time to the image. Adjust placement for times before/after 10pm local time.
-    if len(startTime) == 0:
+    if len(startTime) == 0 or startTime== "TBA":
         draw.text((firstMiddleCol+3,22), "TBA", font=fontSmallReg, fill=fillWhite)
         # Colon (manual dots since the font's colon looks funny).
         #draw.rectangle(((firstMiddleCol+8,25),(firstMiddleCol+8,25)), fill=fillWhite)
@@ -399,68 +399,41 @@ def displayLogos(awayTeam, homeTeam):
     logoSize = (20,20)
 
     if os.path.exists("assets/images/team logos/png/" + awayTeam + ".png"):
-        # Load, crop, and resize the away team logo.
+        # Load and resize the away team logo.
         awayLogo = Image.open("assets/images/team logos/png/" + awayTeam + ".png")
-        #awayLogo = cropImage(awayLogo)
         awayLogo.thumbnail(logoSize)
     else:
-        # Load, crop, and resize the away team logo.
+        # Load and resize the away team logo.
         awayLogo = Image.open("assets/images/team logos/png/NCAA.png")
-        #awayLogo = cropImage(awayLogo)
         awayLogo.thumbnail(logoSize)
 
     if os.path.exists("assets/images/team logos/png/" + homeTeam + ".png"):
-        # Load, crop, and resize the home team logo.
+        # Load and resize the home team logo.
         homeLogo = Image.open("assets/images/team logos/png/" + homeTeam + ".png")
-        #homeLogo = cropImage(homeLogo)
         homeLogo.thumbnail(logoSize)
     else:
-        # Load, crop, and resize the home team logo.
+        # Load and resize the home team logo.
         homeLogo = Image.open("assets/images/team logos/png/NCAA.png")
-        #homeLogo = cropImage(homeLogo)
         homeLogo.thumbnail(logoSize)
-
-    # if not any(d['Team Abbreviation'] == awayTeam for d in getTeamData()):
-    #     # Load, crop, and resize the away team logo.
-    #     awayLogo = Image.open("assets/images/team logos/png/NCAA.png")
-    #     awayLogo = cropImage(awayLogo)
-    #     awayLogo.thumbnail(logoSize)
-    # else:
-    #     # Load, crop, and resize the away team logo.
-    #     awayLogo = Image.open("assets/images/team logos/png/" + awayTeam + ".png")
-    #     awayLogo = cropImage(awayLogo)
-    #     awayLogo.thumbnail(logoSize)
-
-    # if not any(d['Team Abbreviation'] == homeTeam for d in getTeamData()):
-    #     # Load, crop, and resize the home team logo.
-    #     homeLogo = Image.open("assets/images/team logos/png/NCAA.png")
-    #     homeLogo = cropImage(homeLogo)
-    #     homeLogo.thumbnail(logoSize)
-    # else:
-    #     # Load, crop, and resize the home team logo.
-    #     homeLogo = Image.open("assets/images/team logos/png/" + homeTeam + ".png")
-    #     homeLogo = cropImage(homeLogo)
-    #     homeLogo.thumbnail(logoSize)
 
     # Record the width and heights of the logos.
     awayLogoWidth, awayLogoHeight = awayLogo.size
     homeLogoWidth, homeLogoHeight = homeLogo.size
 
-    # Add the logos to the image.
-    # Logos will be bounded by the text region, and be centered vertically.
-    #image.paste(awayLogo, (21-awayLogoWidth, math.floor((32-awayLogoHeight)/2)))
-    #image.paste(homeLogo, (43, math.floor((32-homeLogoHeight)/2)))
     shortDict = getTeamData()
     image.paste(awayLogo, (0, 0))
     image.paste(homeLogo, (44, 0))
     if awayTeam in shortDict:
         draw.text((1,20), shortDict[awayTeam], font=fontMedReg, fill=fillWhite)
     else:
-        draw.text((1,20), "---", font=fontMedReg, fill=fillWhite)
+        draw.text((1,20), awayTeam[0:3], font=fontMedReg, fill=fillWhite)
     if homeTeam in shortDict:
-        draw.text((45,20), shortDict[homeTeam], font=fontMedReg, fill=fillWhite)
+        if len(shortDict[homeTeam]) == 2:
+            draw.text((45,20), " "+shortDict[homeTeam], font=fontMedReg, fill=fillWhite)
+        else:
+            draw.text((45,20), shortDict[homeTeam], font=fontMedReg, fill=fillWhite)
     else:
-        draw.text((45,20), "---", font=fontMedReg, fill=fillWhite)
+        draw.text((45,20), homeTeam[0:3], font=fontMedReg, fill=fillWhite)
     
 
 def displayPeriod(periodName, timeRemaining):
