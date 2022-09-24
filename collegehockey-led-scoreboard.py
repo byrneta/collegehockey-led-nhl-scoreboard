@@ -124,7 +124,7 @@ def getGameData(teams):
                 shortHome = teams[game['game']['home']['names']['char6']]
             else:
                 shortHome = game['game']['home']['names']['char6'][0:3]
-            if: game['game']['away']['names']['char6'] in teams:
+            if game['game']['away']['names']['char6'] in teams:
                 shortAway = teams[game['game']['away']['names']['char6']]
             else:
                 shortAway = game['game']['away']['names']['char6'][0:3]
