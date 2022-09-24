@@ -11,7 +11,7 @@ def getTeamData():
     """Create team names and abbreviations for NCAA Mens Hockey, return information as a dictionary.
 
     Returns:
-        teams (dictionary): Contains the char6 name and three letter abbreviation of each NCAA team.
+        teams (dictionary): Contains the char6 name from NCAA API and three letter abbreviation of each NCAA team.
     """
     
     teams = {
@@ -84,7 +84,7 @@ def getGameData(teams):
     """Get game data for all of today's games from the NCAA API, returns games as a list of dictionaries.
 
     Args:
-        teams (list of dictionaries): Team names and abbreviations. Needed as the game API doesn't return team abbreviations.
+        teams (dictionary): Team names and three letter abbreviations. Needed as the game API doesn't return short team abbreviations.
 
     Returns:
         games (list of dictionaries): All game info needed to display on scoreboard. Teams, scores, start times, game clock, etc.
@@ -278,14 +278,9 @@ def buildGameNotStarted(game):
     #startTime = str(startTime) # Cast to a string for easier parsing.
 
     # Add the start time to the image. Adjust placement for times before/after 10pm local time.
-    if len(startTime) == 0 or startTime== "TBA":
+
+    if len(startTime) == 0 or startTime== "TBA": # If the time isn't listed or listed as TBA
         draw.text((firstMiddleCol+3,22), "TBA", font=fontSmallReg, fill=fillWhite)
-        # Colon (manual dots since the font's colon looks funny).
-        #draw.rectangle(((firstMiddleCol+8,25),(firstMiddleCol+8,25)), fill=fillWhite)
-        #draw.rectangle(((firstMiddleCol+8,27),(firstMiddleCol+8,27)), fill=fillWhite)
-        # Minutes.
-        #draw.text((firstMiddleCol+10,22), "?", font=fontSmallReg, fill=fillWhite)
-        #draw.text((firstMiddleCol+15,22), "?", font=fontSmallReg, fill=fillWhite)
 
     elif startTime[0] == "1": # 10pm or later.
         # Add "@" to the image.
