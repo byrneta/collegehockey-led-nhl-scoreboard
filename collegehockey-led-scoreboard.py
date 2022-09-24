@@ -15,67 +15,67 @@ def getTeamData():
     """
     
     teams = [
-        { 'Team Name': "AIC", 'Team Abbreviation': "AM INT" , 'Team Short': "AIC" },
-        { 'Team Name': "Air Force", 'Team Abbreviation': "AIRFOR" , 'Team Short': "AFA" },
-        { 'Team Name': "Alaska Anchorage", 'Team Abbreviation': "AK ANC" , 'Team Short': "AKA" },
-        { 'Team Name': "Alaska", 'Team Abbreviation': "AK FBK" , 'Team Short': "AKF" },
-        { 'Team Name': "Arizona State", 'Team Abbreviation': "AZ ST" , 'Team Short': "ASU" },
-        { 'Team Name': "Army", 'Team Abbreviation': "ARMY" , 'Team Short': "ARM" },
-        { 'Team Name': "Bemidji State", 'Team Abbreviation': "BEMDJI" , 'Team Short': "BMJ" },
-        { 'Team Name': "Bentley", 'Team Abbreviation': "BENTLY" , 'Team Short': "BEN" },
-        { 'Team Name': "Boston College", 'Team Abbreviation': "BC" , 'Team Short': "BC" },
-        { 'Team Name': "Boston University", 'Team Abbreviation': "BU" , 'Team Short': "BU" },
-        { 'Team Name': "Bowling Green", 'Team Abbreviation': "BGSU" , 'Team Short': "BGS" },
-        { 'Team Name': "Brown", 'Team Abbreviation': "BROWN" , 'Team Short': "BRN" },
-        { 'Team Name': "Canisius", 'Team Abbreviation': "CANISI" , 'Team Short': "CNS" },
-        { 'Team Name': "Clarkson", 'Team Abbreviation': "CLARKS" , 'Team Short': "CLK" },
-        { 'Team Name': "Colgate", 'Team Abbreviation': "COLGAT" , 'Team Short': "CLG" },
-        { 'Team Name': "Colorado College", 'Team Abbreviation': "CO COL" , 'Team Short': "CC" },
-        { 'Team Name': "Connecticut", 'Team Abbreviation': "UCONN" , 'Team Short': "CON" },
-        { 'Team Name': "Cornell", 'Team Abbreviation': "CORN" , 'Team Short': "COR" },
-        { 'Team Name': "Dartmouth", 'Team Abbreviation': "DART" , 'Team Short': "DAR" },
-        { 'Team Name': "Denver", 'Team Abbreviation': "DENVER" , 'Team Short': "DEN" },
-        { 'Team Name': "Ferris State", 'Team Abbreviation': "FERRIS" , 'Team Short': "FSU" },
-        { 'Team Name': "Harvard", 'Team Abbreviation': "HARV" , 'Team Short': "HAR" },
-        { 'Team Name': "Holy Cross", 'Team Abbreviation': "HOLYCR" , 'Team Short': "HCR" },
-        { 'Team Name': "Lake Superior", 'Team Abbreviation': "LK SUP" , 'Team Short': "LSS" },
-        { 'Team Name': "Lindenwood", 'Team Abbreviation': "LINWOD", 'Team Short': "LIN" },
-        { 'Team Name': "LIU", 'Team Abbreviation': "LIU" , 'Team Short': "LIU" },
-        { 'Team Name': "Maine", 'Team Abbreviation': "MAINE" , 'Team Short': "MNE" },
-        { 'Team Name': "Massachusetts", 'Team Abbreviation': "UMASS" , 'Team Short': "UMA" },
-        { 'Team Name': "Mercyhurst", 'Team Abbreviation': "MERCYH" , 'Team Short': "MRC" },
-        { 'Team Name': "Merrimack", 'Team Abbreviation': "MERMCK" , 'Team Short': "MER" },
-        { 'Team Name': "Miami", 'Team Abbreviation': "MIA OH" , 'Team Short': "MIA" },
-        { 'Team Name': "Michigan State", 'Team Abbreviation': "MICHST" , 'Team Short': "MSU" },
-        { 'Team Name': "Michigan Tech", 'Team Abbreviation': "MITECH" , 'Team Short': "MTU" },
-        { 'Team Name': "Michigan", 'Team Abbreviation': "MICH" , 'Team Short': "MIC" },
-        { 'Team Name': "Minnesota Duluth", 'Team Abbreviation': "MN DUL" , 'Team Short': "MND" },
-        { 'Team Name': "Minnesota State", 'Team Abbreviation': "MNSTMA" , 'Team Short': "MNS" },
-        { 'Team Name': "Minnesota", 'Team Abbreviation': "MINN" , 'Team Short': "MIN" },
-        { 'Team Name': "New Hampshire", 'Team Abbreviation': "UNH" , 'Team Short': "UNH" },
-        { 'Team Name': "Niagara", 'Team Abbreviation': "NIAGRA" , 'Team Short': "NIA" },
-        { 'Team Name': "North Dakota", 'Team Abbreviation': "NO DAK" , 'Team Short': "NDK" },
-        { 'Team Name': "Northeastern", 'Team Abbreviation': "NOEAST" , 'Team Short': "NOE" },
-        { 'Team Name': "Northern Michigan", 'Team Abbreviation': "N MICH" , 'Team Short': "NMU" },
-        { 'Team Name': "Notre Dame", 'Team Abbreviation': "N DAME" , 'Team Short': "NDM" },
-        { 'Team Name': "Ohio State", 'Team Abbreviation': "OHIOST" , 'Team Short': "OSU" },
-        { 'Team Name': "Omaha", 'Team Abbreviation': "OMAHA" , 'Team Short': "UNO" },
-        { 'Team Name': "Penn State", 'Team Abbreviation': "PENNST" , 'Team Short': "PSU" },
-        { 'Team Name': "Princeton", 'Team Abbreviation': "PRINCE" , 'Team Short': "PRI" },
-        { 'Team Name': "Providence", 'Team Abbreviation': "PROV" , 'Team Short': "PRV" },
-        { 'Team Name': "Quinnipiac", 'Team Abbreviation': "QUINN" , 'Team Short': "QUI" },
-        { 'Team Name': "Rensselaer", 'Team Abbreviation': "RPI" , 'Team Short': "REN" },
-        { 'Team Name': "RIT", 'Team Abbreviation': "RIT" , 'Team Short': "RIT" },
-        { 'Team Name': "Sacred Heart", 'Team Abbreviation': "SACHRT" , 'Team Short': "SAC" },
-        { 'Team Name': "St. Cloud", 'Team Abbreviation': "SCSU" , 'Team Short': "STC" },
-        { 'Team Name': "St. Lawrence", 'Team Abbreviation': "ST LAW" , 'Team Short': "STL" },
-        { 'Team Name': "St. Thomas", 'Team Abbreviation': "STTHOM" , 'Team Short': "STT" },
-        { 'Team Name': "UMass Lowell", 'Team Abbreviation': "UMASSL" , 'Team Short': "UML" },
-        { 'Team Name': "Union", 'Team Abbreviation': "UNION" , 'Team Short': "UNI" },
-        { 'Team Name': "Vermont", 'Team Abbreviation': "VERMNT" , 'Team Short': "VER" },
-        { 'Team Name': "Western Michigan", 'Team Abbreviation': "W MICH" , 'Team Short': "WMU" },
-        { 'Team Name': "Wisconsin", 'Team Abbreviation': "WISC" , 'Team Short': "WIS" },
-        { 'Team Name': "Yale", 'Team Abbreviation': "YALE" , 'Team Short': "YLE" }
+        { 'AM INT' : "AIC" },
+        { 'AIRFOR' : "AFA" },
+        { 'AK ANC' : "AKA" },
+        { 'AK FBK' : "AKF" },
+        { 'AZ ST' : "ASU" },
+        { 'ARMY' : "ARM" },
+        { 'BEMDJI' : "BMJ" },
+        { 'BENTLY' : "BEN" },
+        { 'BC' : "BC" },
+        { 'BU' : "BU" },
+        { 'BGSU' : "BGS" },
+        { 'BROWN': "BRN" },
+        { 'CANISI' : "CNS" },
+        { 'CLARKS' : "CLK" },
+        { 'COLGAT' : "CLG" },
+        { 'CO COL' : "CC" },
+        { 'UCONN' : "CON" },
+        { 'CORN' : "COR" },
+        { 'DART' : "DAR" },
+        { 'DENVER' : "DEN" },
+        { 'FERRIS' : "FSU" },
+        { 'HARV' : "HAR" },
+        { 'HOLYCR' : "HCR" },
+        { 'LK SUP' : "LSS" },
+        { 'LINWOD' : "LIN" },
+        { 'LIU': "LIU" },
+        { 'MAINE' : "MNE" },
+        { 'UMASS' : "UMA" },
+        { 'MERCYH' : "MRC" },
+        { 'MERMCK' : "MER" },
+        { 'MIA OH' : "MIA" },
+        { 'MICHST' : "MSU" },
+        { 'MITECH' : "MTU" },
+        { 'MICH' : "MIC" },
+        { 'MN DUL' : "MND" },
+        { 'MNSTMA' : "MNS" },
+        { 'MINN' : "MIN" },
+        { 'UNH' : "UNH" },
+        { 'NIAGRA' : "NIA" },
+        { 'NO DAK' : "NDK" },
+        { 'NOEAST' : "NOE" },
+        { 'N MICH' : "NMU" },
+        { 'N DAME' : "NDM" },
+        { 'OHIOST' : "OSU" },
+        { 'OMAHA' : "UNO" },
+        { 'PENNST' : "PSU" },
+        { 'PRINCE' : "PRI" },
+        { 'PROV' : "PRV" },
+        { 'QUINN' : "QUI" },
+        { 'RPI' : "REN" },
+        { 'RIT' : "RIT" },
+        { 'SACHRT' : "SAC" },
+        { 'SCSU' : "STC" },
+        { 'ST LAW' : "STL" },
+        { 'STTHOM' : "STT" },
+        { 'UMASSL' : "UML" },
+        { 'UNION' : "UNI" },
+        { 'VERMNT' : "VER" },
+        { 'W MICH' : "WMU" },
+        { 'WISC' : "WIS" },
+        { 'YALE' : "YLE" }
     ]
 
     return teams
@@ -361,7 +361,7 @@ def buildNoGamesToday():
     # Add the NCAA logo to the image.
     ncaaLogo = Image.open("assets/images/NCAA_Logo_Simplified.png")
     #ncaaLogo = cropImage(ncaaLogo)
-    ncaaLogo.thumbnail((40,30))
+    ncaaLogo.thumbnail((30,30))
     image.paste(ncaaLogo, (1, 1))
 
     # Add "No Games Today" to the image.
@@ -375,7 +375,7 @@ def buildLoading():
     # Add the NCAA logo to the image.
     ncaaLogo = Image.open("assets/images/NCAA_Logo_Simplified.png")
     #ncaaLogo = cropImage(ncaaLogo)
-    ncaaLogo.thumbnail((40,30))
+    ncaaLogo.thumbnail((30,30))
     image.paste(ncaaLogo, (1, 1))
 
     # Add "Now Loading" to the image.
@@ -391,7 +391,7 @@ def displayLogos(awayTeam, homeTeam):
     """
 
     # Define the max width and height that a logo can be.
-    logoSize = (40,30)
+    logoSize = (20,20)
 
     if os.path.exists("assets/images/team logos/png/" + awayTeam + ".png"):
         # Load, crop, and resize the away team logo.
@@ -443,8 +443,20 @@ def displayLogos(awayTeam, homeTeam):
 
     # Add the logos to the image.
     # Logos will be bounded by the text region, and be centered vertically.
-    image.paste(awayLogo, (21-awayLogoWidth, math.floor((32-awayLogoHeight)/2)))
-    image.paste(homeLogo, (43, math.floor((32-homeLogoHeight)/2)))
+    #image.paste(awayLogo, (21-awayLogoWidth, math.floor((32-awayLogoHeight)/2)))
+    #image.paste(homeLogo, (43, math.floor((32-homeLogoHeight)/2)))
+    shortDict = getTeamData()
+    image.paste(awayLogo, (0, 0))
+    image.paste(homeLogo, (44, 0))
+    if awayTeam in shortDict:
+        draw.text((1,20), shortDict[awayTeam], font=fontMedReg, fill=fillWhite)
+    else:
+        draw.text((1,20), "---", font=fontMedReg, fill=fillWhite)
+    if homeTeam in shortDict:
+        draw.text((45,20), shortDict[homeTeam], font=fontMedReg, fill=fillWhite)
+    else:
+        draw.text((45,20), "---", font=fontMedReg, fill=fillWhite)
+    
 
 def displayPeriod(periodName, timeRemaining):
     """Adds the current period to the image object.
