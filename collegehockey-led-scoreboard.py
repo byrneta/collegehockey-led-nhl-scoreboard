@@ -94,7 +94,12 @@ def getGameData(teams):
   
     YEAR = '{:04d}'.format(todays_date.year)
     MONTH = '{:02d}'.format(todays_date.month)
-    DAY = '{:02d}'.format(todays_date.day)
+
+    if datetime.now().strftime("%H") < 10:
+        yesterdays_date = todays_date - timedelta(days = 1)
+        DAY = '{:02d}'.format(yesterdays_date.day)
+    else:
+        DAY = '{:02d}'.format(todays_date.day)
 
     # Call the NCAA API for today's game info. Save the result as a JSON object.
     gamesResponse = requests.get(url="https://data.ncaa.com/casablanca/scoreboard/icehockey-men/d1/"+YEAR+"/"+MONTH+"/"+DAY+"/scoreboard.json", timeout=REQUEST_TIMEOUT)
