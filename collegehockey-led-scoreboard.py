@@ -120,6 +120,15 @@ def getGameData(teams):
                 perName = "Not Started"
                 perTimeRem = "Not Started"
 
+            if game['game']['home']['names']['char6'] in teams:
+                shortHome = teams[game['game']['home']['names']['char6']]
+            else:
+                shortHome = game['game']['home']['names']['char6'][0:3]
+            if: game['game']['away']['names']['char6'] in teams:
+                shortAway = teams[game['game']['away']['names']['char6']]
+            else:
+                shortAway = game['game']['away']['names']['char6'][0:3]
+
             # Prep the dict data.
             gameDict = {
                 'Game ID': int(game['game']['gameID']),
@@ -135,7 +144,9 @@ def getGameData(teams):
                 'Period Name': perName,
                 'Period Time Remaining': perTimeRem,
                 'Home Winner': json.dumps(game['game']['home']['winner']),
-                'Away Winner': json.dumps(game['game']['away']['winner'])
+                'Away Winner': json.dumps(game['game']['away']['winner']),
+                'Home Short': shortHome,
+                'Away Short': shortAway
             }
 
             # Append the dict to the games list.
@@ -244,7 +255,7 @@ def buildGameNotStarted(game):
     """
 
     # Add the logos of the teams involved to the image.
-    displayLogos(game['Away Abbreviation'],game['Home Abbreviation'])
+    displayLogos(game['Away Abbreviation'],game['Home Abbreviation'],game['Away Short'],game['Home Short'])
 
     # Add "Today" to the image.
     draw.text((firstMiddleCol+1,0), "T", font=fontMedReg, fill=fillWhite)
@@ -308,7 +319,7 @@ def buildGameInProgress(game, gameOld, scoringTeam):
     """
 
     # Add the logos of the teams involved to the image.
-    displayLogos(game['Away Abbreviation'],game['Home Abbreviation'])
+    displayLogos(game['Away Abbreviation'],game['Home Abbreviation'],game['Away Short'],game['Home Short'])
 
     # Add the period to the image.
     displayPeriod(game['Period Name'], game['Period Time Remaining'])
@@ -325,7 +336,7 @@ def buildGameOver(game, winningTeam):
     """
 
     # Add the logos of the teams involved to the image.
-    displayLogos(game['Away Abbreviation'],game['Home Abbreviation'])
+    displayLogos(game['Away Abbreviation'],game['Home Abbreviation'],game['Away Short'],game['Home Short'])
 
     # Add "Final" to the image.
     draw.text((firstMiddleCol+1,0), "F", font=fontMedReg, fill=fillWhite)
@@ -355,7 +366,7 @@ def buildGamePostponed(game):
     """
     
     # Add the logos of the teams involved to the image.
-    displayLogos(game['Away Abbreviation'],game['Home Abbreviation'])
+    displayLogos(game['Away Abbreviation'],game['Home Abbreviation'],game['Away Short'],game['Home Short'])
 
     # Add "PPD" to the image.
     draw.text((firstMiddleCol+2,0), "PPD", font=fontMedReg, fill=fillWhite)
@@ -387,12 +398,14 @@ def buildLoading():
     draw.text((29,8), "Now", font=fontSmallReg, fill=fillWhite)
     draw.text((29,15), "Loading", font=fontSmallReg, fill=fillWhite)
 
-def displayLogos(awayTeam, homeTeam):
+def displayLogos(awayTeam, homeTeam, shortHome, shortAway):
     """Adds the logos of the home and away teams to the image object, making sure to not overlap text and center logos.
 
     Args:
         awayTeam (string): Abbreviation of the away team.
         homeTeam (string): Abbreviation of the home team.
+        awayShort (string): Three letter abbreviation of the away team.
+        homeShort (string): Three letter abbreviation of the home team.
     """
 
     # Define the max width and height that a logo can be.
@@ -420,20 +433,15 @@ def displayLogos(awayTeam, homeTeam):
     awayLogoWidth, awayLogoHeight = awayLogo.size
     homeLogoWidth, homeLogoHeight = homeLogo.size
 
-    shortDict = getTeamData()
     image.paste(awayLogo, (0, 0))
     image.paste(homeLogo, (44, 0))
-    if awayTeam in shortDict:
-        draw.text((1,20), shortDict[awayTeam], font=fontMedReg, fill=fillWhite)
+
+    draw.text((1,20), shortAway, font=fontMedReg, fill=fillWhite)
+
+    if len(shortHome) == 2:
+        draw.text((45,20), " "+shortHome, font=fontMedReg, fill=fillWhite)
     else:
-        draw.text((1,20), awayTeam[0:3], font=fontMedReg, fill=fillWhite)
-    if homeTeam in shortDict:
-        if len(shortDict[homeTeam]) == 2:
-            draw.text((45,20), " "+shortDict[homeTeam], font=fontMedReg, fill=fillWhite)
-        else:
-            draw.text((45,20), shortDict[homeTeam], font=fontMedReg, fill=fillWhite)
-    else:
-        draw.text((45,20), homeTeam[0:3], font=fontMedReg, fill=fillWhite)
+        draw.text((45,20), shortHome, font=fontMedReg, fill=fillWhite)
     
 
 def displayPeriod(periodName, timeRemaining):
