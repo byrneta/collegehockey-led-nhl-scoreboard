@@ -125,14 +125,14 @@ def getGameData(teams):
             elif len(game['game']['home']['names']['char6']) > 0:
                 shortHome = game['game']['home']['names']['char6'][0:3]
             else:
-                shortHome = game['game']['home']['names']['short'][0:3]
+                shortHome = game['game']['home']['names']['short'][0:3].upper()
 
             if game['game']['away']['names']['char6'] in teams:
                 shortAway = teams[game['game']['away']['names']['char6']]
             elif len(game['game']['away']['names']['char6']) > 0:
                 shortAway = game['game']['away']['names']['char6'][0:3]
             else:
-                shortAway = game['game']['away']['names']['short'][0:3]
+                shortAway = game['game']['away']['names']['short'][0:3].upper()
 
             # Prep the dict data.
             gameDict = {
