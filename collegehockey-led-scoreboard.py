@@ -95,7 +95,7 @@ def getGameData(teams):
     YEAR = '{:04d}'.format(todays_date.year)
     MONTH = '{:02d}'.format(todays_date.month)
 
-    if datetime.now().strftime("%H") < 10:
+    if int(datetime.now().strftime("%H")) < 10:
         yesterdays_date = todays_date - timedelta(days = 1)
         DAY = '{:02d}'.format(yesterdays_date.day)
     else:
