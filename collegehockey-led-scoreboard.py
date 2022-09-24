@@ -122,12 +122,17 @@ def getGameData(teams):
 
             if game['game']['home']['names']['char6'] in teams:
                 shortHome = teams[game['game']['home']['names']['char6']]
-            else:
+            elif len(game['game']['home']['names']['char6']) > 0:
                 shortHome = game['game']['home']['names']['char6'][0:3]
+            else:
+                shortHome = game['game']['home']['names']['short'][0:3]
+
             if game['game']['away']['names']['char6'] in teams:
                 shortAway = teams[game['game']['away']['names']['char6']]
-            else:
+            elif len(game['game']['away']['names']['char6']) > 0:
                 shortAway = game['game']['away']['names']['char6'][0:3]
+            else:
+                shortAway = game['game']['away']['names']['short'][0:3]
 
             # Prep the dict data.
             gameDict = {
@@ -398,7 +403,7 @@ def buildLoading():
     draw.text((29,8), "Now", font=fontSmallReg, fill=fillWhite)
     draw.text((29,15), "Loading", font=fontSmallReg, fill=fillWhite)
 
-def displayLogos(awayTeam, homeTeam, shortHome, shortAway):
+def displayLogos(awayTeam, homeTeam, shortAway, shortHome):
     """Adds the logos of the home and away teams to the image object, making sure to not overlap text and center logos.
 
     Args:
