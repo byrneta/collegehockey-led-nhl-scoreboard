@@ -269,13 +269,7 @@ def buildGameNotStarted(game):
     draw.text((firstMiddleCol+13,2), "a", font=fontSmallReg, fill=fillWhite)
     draw.text((firstMiddleCol+17,2), "y", font=fontSmallReg, fill=fillWhite)
 
-    # Add "@" to the image.
-    #draw.text((firstMiddleCol+6,8), "@", font=fontLargeReg, fill=fillWhite)
-
-    # Extract the start time in 12 hour format.
     startTime = game['Start Time Local']
-    #startTime = startTime.time().strftime('%I:%M')
-    #startTime = str(startTime) # Cast to a string for easier parsing.
 
     # Add the start time to the image. Adjust placement for times before/after 10pm local time.
 
@@ -349,11 +343,8 @@ def buildGameOver(game, winningTeam):
     # If so, add that to the image.
     if game['Period Name'] == "FINAL (OT)":
         draw.text((firstMiddleCol+6,9), "OT", font=fontMedReg, fill=fillWhite)
-        #draw.text((firstMiddleCol+6,9), game['Period Name'], font=fontMedReg, fill=fillWhite)
     elif game['Period Name'] == "FINAL/SO":
         draw.text((firstMiddleCol+6,9), "SO", font=fontMedReg, fill=fillWhite)
-    #elif game['Period Number'] > 4: # If the game ended in 2OT or later.
-    #    draw.text((firstMiddleCol+3,9), game["Period Name"], font=fontMedReg, fill=fillWhite)
 
     # Add the current score to the image.
     displayScore(game['Away Score'],game['Home Score'], winningTeam)
@@ -376,7 +367,6 @@ def buildNoGamesToday():
 
     # Add the NCAA logo to the image.
     ncaaLogo = Image.open("assets/images/NCAA_Logo_Simplified.png")
-    #ncaaLogo = cropImage(ncaaLogo)
     ncaaLogo.thumbnail((30,30))
     image.paste(ncaaLogo, (1, 1))
 
@@ -390,7 +380,6 @@ def buildLoading():
 
     # Add the NCAA logo to the image.
     ncaaLogo = Image.open("assets/images/NCAA_Logo_Simplified.png")
-    #ncaaLogo = cropImage(ncaaLogo)
     ncaaLogo.thumbnail((30,30))
     image.paste(ncaaLogo, (1, 1))
 
