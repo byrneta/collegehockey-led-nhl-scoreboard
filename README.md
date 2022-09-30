@@ -4,7 +4,7 @@ Work in progress fork of the awesome [rpi-led-nhl-scoreboard](https://github.com
 
 Display live NCAA Men's Ice Hockey game scores, start times, etc. on a LED matrix driven by a Raspberry Pi. Makes use of the unofficial NCAA API for all game information. Displays the current day's games unless it is before 10:00 AM local time, when it will display the previous night's outcomes.
 
-![Example](https://github.com/byrneta/collegehockey-led-scoreboard/blob/main/examples/demo.jpeg)
+![Example](https://github.com/byrneta/collegehockey-led-scoreboard/blob/main/examples/scoreboard.gif)
 
 ## To-Do
 1. Add logic to display upcoming day's games if there are no games on a given day
