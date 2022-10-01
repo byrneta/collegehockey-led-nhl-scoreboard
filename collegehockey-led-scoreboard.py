@@ -470,13 +470,13 @@ def displayPeriod(periodName, timeRemaining):
     # If not in the SO, and the period not over, add the time remaining in the period to the image.
     if periodName != "SO":
         if timeRemaining != "0:00":
-            displayTimeRemaing(timeRemaining) # Adds the time remaining in the period to the image.
+            displayTimeRemaining(timeRemaining) # Adds the time remaining in the period to the image.
 
         # If not in the SO and the time remaining is "END", then we know that we're in intermission. Don't add time remaining to the image.
         else:
             draw.text((firstMiddleCol+2,8), "INT", font=fontMedReg, fill=fillWhite)
 
-def displayTimeRemaing(timeRemaining):
+def displayTimeRemaining(timeRemaining):
     """Adds the remaining time in the period to the image. Takes into account different widths of time remaining.
 
     Args:
@@ -484,7 +484,7 @@ def displayTimeRemaing(timeRemaining):
     """
 
     # If time left is 20:00 (period about to start), add the time to the image with specific spacing.
-    if timeRemaining[0] == "2": # If the first digit of the time is 2.
+    if timeRemaining[0] == "2" and len(timeRemaining) == 5: # If the first digit of the time is 2.
         # Minutes.
         draw.text((firstMiddleCol+1,9), timeRemaining[0], font=fontSmallReg, fill=fillWhite)
         draw.text((firstMiddleCol+5,9), timeRemaining[1], font=fontSmallReg, fill=fillWhite)
@@ -496,7 +496,7 @@ def displayTimeRemaing(timeRemaining):
         draw.text((firstMiddleCol+16,9), timeRemaining[4], font=fontSmallReg, fill=fillWhite)
     
     # If time left is between 10 and 20 minutes, add the time to the image with different spacing.
-    elif timeRemaining[0] == "1": # If the first digit of the time is 1.
+    elif timeRemaining[0] == "1" and len(timeRemaining) == 5: # If the first digit of the time is 1.
         # Minutes.
         draw.text((firstMiddleCol,9), timeRemaining[0], font=fontSmallReg, fill=fillWhite)
         draw.text((firstMiddleCol+5,9), timeRemaining[1], font=fontSmallReg, fill=fillWhite)
@@ -508,7 +508,17 @@ def displayTimeRemaing(timeRemaining):
         draw.text((firstMiddleCol+17,9), timeRemaining[4], font=fontSmallReg, fill=fillWhite)
 
     # Otherwise, time is less than 10 minutes. Add the time to the image with spacing for a single digit minute.
-    else:
+    elif timeRemaining[0] == "0" and len(timeRemaining) == 5:
+        # Minutes.
+        draw.text((firstMiddleCol+3,9), timeRemaining[1], font=fontSmallReg, fill=fillWhite)
+        # Colon.
+        draw.rectangle(((firstMiddleCol+8,12),(firstMiddleCol+8,12)), fill=fillWhite)
+        draw.rectangle(((firstMiddleCol+8,14),(firstMiddleCol+8,14)), fill=fillWhite)
+        # Seconds.
+        draw.text((firstMiddleCol+10,9), timeRemaining[3], font=fontSmallReg, fill=fillWhite)
+        draw.text((firstMiddleCol+15,9), timeRemaining[4], font=fontSmallReg, fill=fillWhite)
+
+    else :
         # Minutes.
         draw.text((firstMiddleCol+3,9), timeRemaining[0], font=fontSmallReg, fill=fillWhite)
         # Colon.
