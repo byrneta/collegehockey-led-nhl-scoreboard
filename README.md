@@ -110,12 +110,70 @@ These instructions assume some basic knowledge of Unix and how to edit files via
     pip3 install -r requirements.txt
     ```
 
-15. Make main code run at RPi startup.
+## Auto Startup
+
+### Supervisor (Recommended)
+Supervisor is a Process Control System. Once installed and configured it will run the scoreboard for you and restart it in case of a crash. What's even better is that you can also control the board from your phone.
+
+1. To install Supervisor, run this installation command in your terminal.
+
+    ```
+    sudo apt-get install supervisor
+
+    ```
+
+2. Once the process done, open the supervisor config file,
+
+    ```
+    sudo nano /etc/supervisor/supervisord.conf
+    ```
+
+    and add those two lines at the bottom of the file.
+
+    ```
+    [inet_http_server]
+    port=*:9001
+    ```
+
+3. Close and save the file.
+
+    ```
+    Press Control-x
+    Press y
+    Press [enter]
+    ```
+
+4. Now lets create a new file called college-hockey-scoreboard.conf into the conf.d directory of supervisor, by running this command,
+
+    ```
+    sudo nano /etc/supervisor/conf.d/college-hockey-scoreboard.conf
+
+    ```
+
+5. In this new file copy and paste these lines.
+
+    ```
+    [program:college-hockey-scoreboard]
+    command=sudo python3 collegehockey-led-scoreboard.py
+    directory=/home/pi/collegehockey-led-scoreboard
+    autostart=true
+    autorestart=true
+
+    ```
+
+6. Now, reboot the RPi. It should run the scoreboard automatically. Open a browser and enter the IP address of your RPi in the address bar followed by `:9001`. It should look similar to this `192.168.2.19:9001`. You will see the supervisor dashboard with the scoreboard process running. If you see the dashboard but no process, reboot the RPi and refresh the page.
+
+    You should be up and running now. From the supervison dashboard, you can control the process of the scoreboard (e.g start, restart, stop).
+
+    To troubleshoot the scoreboard using supervision, you can click on the name of the process to see the latest log of the scoreboard. This is really useful to know what the scoreboard is doing in case of a problem.
+
+### Startup Script
+1.  Make main code run at RPi startup.
 
     ```bash
     nano ~/start-scoreboard.sh
     ```
-    Copy-paste the following:
+2. Copy-paste the following:
     ```
     #!/bin/bash
     cd /home/pi/collegehockey-led-scoreboard
@@ -149,24 +207,24 @@ These instructions assume some basic knowledge of Unix and how to edit files via
     done
     ```
 
-    Save and exit. Now, let's make that script executable:
+3. Save and exit. Now, let's make that script executable:
 
     ```
     chmod +x ~/start-scoreboard.sh
     ```
 
-    Make the script run on boot:
+4. Make the script run on boot:
 
     ```
     sudo crontab -e
     ```
-    Add the following command to the bottom:
+5. Add the following command to the bottom:
 
     ```
     @reboot /home/pi/start-scoreboard.sh > /home/pi/cron.log 2>&1
     ```
 
-    Save and exit. Finally, test your change by rebooting your RPi.
+6. Save and exit. Finally, test your change by rebooting your RPi.
 
     ```
     sudo reboot
