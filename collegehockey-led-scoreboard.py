@@ -176,9 +176,9 @@ def getMaxBrightness(time):
     if time == 0:
         time = 1
 
-    # Max brightness is the time divided by 12 and multiplied by 100. For pm times, the difference between 24 and the time is used.
+    # Max brightness is the time divided by 12 and multiplied by the global maxMatrixBrightness. For pm times, the difference between 24 and the time is used.
     # This means that max brightness is at noon, with the lowest from 11pm through 1am (because of the above edge case).
-    maxBrightness = math.ceil(100 * time / 12 if time <= 12 else 100 * (24-time)/12)
+    maxBrightness = math.ceil(maxMatrixBrightness * time / 12 if time <= 12 else maxMatrixBrightness * (24-time)/12)
     
     # If the previous calculation results in a brightness less than 15, set brightness to 15.
     maxBrightness = maxBrightness if maxBrightness >= 15 else 15
@@ -748,6 +748,9 @@ if __name__ == "__main__":
     fillWhite = 255,255,255,255
     fillBlack = 0,0,0,255
     fillRed = 255,50,50,255
+
+    # Define the max brightness of the RGB matrix display
+    maxMatrixBrightness = 60
 
     # Define the first col that can be used for center text.
     # i.e. the first col you can use without worry of logo overlap.
