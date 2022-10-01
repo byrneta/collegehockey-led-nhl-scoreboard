@@ -726,6 +726,9 @@ if __name__ == "__main__":
     options.parallel = 1
     options.gpio_slowdown= 2
     options.hardware_mapping = 'adafruit-hat-pwm'
+    options.pwm_bits = 10
+    options.pwm_dither_bits = 1
+    options.limit_refresh_rate_hz = 120
 
     # Define a matrix object from the options.
     matrix = RGBMatrix(options = options)
