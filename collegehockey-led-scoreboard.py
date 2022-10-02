@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from datetime import datetime, timezone, date
+from datetime import datetime, timezone, date, timedelta
 import requests
 import json
 import time
@@ -91,14 +91,16 @@ def getGameData(teams):
     """
     REQUEST_TIMEOUT = 5
     todays_date = date.today()
-  
-    YEAR = '{:04d}'.format(todays_date.year)
-    MONTH = '{:02d}'.format(todays_date.month)
 
+    # If earlier than 10AM local time, pull games from the previous night
     if int(datetime.now().strftime("%H")) < 10:
         yesterdays_date = todays_date - timedelta(days = 1)
+        YEAR = '{:04d}'.format(yesterdays_date.year)
+        MONTH = '{:02d}'.format(yesterdays_date.month)
         DAY = '{:02d}'.format(yesterdays_date.day)
     else:
+        YEAR = '{:04d}'.format(todays_date.year)
+        MONTH = '{:02d}'.format(todays_date.month)
         DAY = '{:02d}'.format(todays_date.day)
 
     # Call the NCAA API for today's game info. Save the result as a JSON object.
