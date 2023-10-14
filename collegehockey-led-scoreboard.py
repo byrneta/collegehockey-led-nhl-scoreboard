@@ -21,6 +21,7 @@ def getTeamData():
         'AK FBK' : "AKF" ,
         'AZ ST' : "ASU" ,
         'ARMY' : "ARM" ,
+        'AUG SD' : "AUG" ,
         'BEMDJI' : "BMJ" ,
         'BENTLY' : "BEN" ,
         'BC' : "BC" ,
@@ -66,10 +67,12 @@ def getTeamData():
         'QUINN' : "QUI" ,
         'RPI' : "REN" ,
         'RIT' : "RIT" ,
+        'ROBMOR' : "ROB" ,
         'SACHRT' : "SAC" ,
         'SCSU' : "STC" ,
         'ST LAW' : "STL" ,
         'STTHOM' : "STT" ,
+        'STONEH' : "STO" ,
         'UMASSL' : "UML" ,
         'UNION' : "UNI" ,
         'VERMNT' : "VER" ,
@@ -92,8 +95,8 @@ def getGameData(teams):
     REQUEST_TIMEOUT = 5
     todays_date = date.today()
 
-    # If earlier than 10AM local time, pull games from the previous night
-    if int(datetime.now().strftime("%H")) < 10:
+    # If earlier than 12PM local time, pull games from the previous night
+    if int(datetime.now().strftime("%H")) < 12:
         yesterdays_date = todays_date - timedelta(days = 1)
         YEAR = '{:04d}'.format(yesterdays_date.year)
         MONTH = '{:02d}'.format(yesterdays_date.month)
@@ -427,12 +430,15 @@ def displayLogos(awayTeam, homeTeam, shortAway, shortHome):
     image.paste(awayLogo, (0, 0))
     image.paste(homeLogo, (44, 0))
 
-    draw.text((1,20), shortAway, font=fontMedReg, fill=fillWhite)
+    if len(shortAway) == 2:
+        draw.text((4,20), shortAway, font=fontMedReg, fill=fillWhite)
+    else:
+        draw.text((1,20), shortAway, font=fontMedReg, fill=fillWhite)
 
     if len(shortHome) == 2:
-        draw.text((45,20), " "+shortHome, font=fontMedReg, fill=fillWhite)
+        draw.text((49,20), shortHome, font=fontMedReg, fill=fillWhite)
     else:
-        draw.text((45,20), shortHome, font=fontMedReg, fill=fillWhite)
+        draw.text((46,20), shortHome, font=fontMedReg, fill=fillWhite)
     
 
 def displayPeriod(periodName, timeRemaining):
@@ -614,14 +620,20 @@ def runScoreboard():
             networkError = False
             break
 
-        # In the event that the NCAA API cannot be reached, set the bottom right LED to red.
+        # In the event that the NCAA API cannot be reached, assume No Games Today.
         # TODO: Make this more robust for specific fail cases.
         except:
             networkError = True
-            if i >= 10:
-                draw.rectangle(((63,31),(63,31)), fill=fillRed)
-                matrix.SetImage(image)
-            time.sleep(1)
+            draw.rectangle(((0,0),(63,31)), fill=fillBlack)
+            matrix.SetImage(image)
+            buildNoGamesToday()
+            matrix.brightness = maxBrightness
+            matrix.SetImage(image)
+            time.sleep(3600)
+            #    if i >= 10:
+            #        draw.rectangle(((63,31),(63,31)), fill=fillRed)
+            #        matrix.SetImage(image)
+            #    time.sleep(1)
 
     # Wait one extra second on the loading screen. Users thought it was too quick.
     time.sleep(1)
@@ -707,12 +719,12 @@ def runScoreboard():
                 draw.rectangle(((0,0),(63,31)), fill=fillBlack) 
                 matrix.SetImage(image)
 
-        # If there's no games, build the no games today screen, then wait 10 minutes before checking again.
+        # If there's no games, build the no games today screen, then wait 60 minutes before checking again.
         else:
             buildNoGamesToday()
             matrix.brightness = maxBrightness
             matrix.SetImage(image)
-            time.sleep(600)
+            time.sleep(3600)
             draw.rectangle(((0,0),(63,31)), fill=fillBlack)
         
         # Refresh the game data.
