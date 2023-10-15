@@ -93,6 +93,7 @@ def getGameData(teams):
         games (list of dictionaries): All game info needed to display on scoreboard. Teams, scores, start times, game clock, etc.
     """
     REQUEST_TIMEOUT = 5
+    REQUEST_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 'accept-language': 'en-US,en-CA;q=0.9,en;q=0.8,hi-IN;q=0.7,hi;q=0.6'}
     todays_date = date.today()
 
     # If earlier than 12PM local time, pull games from the previous night
@@ -107,7 +108,7 @@ def getGameData(teams):
         DAY = '{:02d}'.format(todays_date.day)
 
     # Call the NCAA API for today's game info. Save the result as a JSON object.
-    gamesResponse = requests.get(url="https://data.ncaa.com/casablanca/scoreboard/icehockey-men/d1/"+YEAR+"/"+MONTH+"/"+DAY+"/scoreboard.json", timeout=REQUEST_TIMEOUT)
+    gamesResponse = requests.get(url="https://data.ncaa.com/casablanca/scoreboard/icehockey-men/d1/"+YEAR+"/"+MONTH+"/"+DAY+"/scoreboard.json", headers=REQUEST_HEADERS, timeout=REQUEST_TIMEOUT)
     gamesJson = gamesResponse.json()
 
     # Declare an empty list to hold the games dicts.
@@ -138,10 +139,14 @@ def getGameData(teams):
                 shortAway = game['game']['away']['names']['char6'][0:3]
             else:
                 shortAway = game['game']['away']['names']['short'][0:3].upper()
+            if game['game']['gameID'] == "":
+                gameIdent = "0"
+            else:
+                gameIdent = game['game']['gameID']
 
             # Prep the dict data.
             gameDict = {
-                'Game ID': int(game['game']['gameID']),
+                'Game ID': int(gameIdent),
                 'Home Team': game['game']['home']['names']['short'],
                 'Home Abbreviation': game['game']['home']['names']['char6'],
                 'Away Team': game['game']['away']['names']['short'],
@@ -348,6 +353,14 @@ def buildGameOver(game, winningTeam):
     # If so, add that to the image.
     if game['Period Name'] == "FINAL (OT)":
         draw.text((firstMiddleCol+6,9), "OT", font=fontMedReg, fill=fillWhite)
+    if game['Period Name'] == "FINAL (2OT)":
+        draw.text((firstMiddleCol+2,9), "2OT", font=fontMedReg, fill=fillWhite)
+    if game['Period Name'] == "FINAL (3OT)":
+        draw.text((firstMiddleCol+2,9), "3OT", font=fontMedReg, fill=fillWhite)
+    if game['Period Name'] == "FINAL (4OT)":
+        draw.text((firstMiddleCol+2,9), "4OT", font=fontMedReg, fill=fillWhite)
+    if game['Period Name'] == "FINAL (5OT)":
+        draw.text((firstMiddleCol+2,9), "5OT", font=fontMedReg, fill=fillWhite)
     elif game['Period Name'] == "FINAL/SO":
         draw.text((firstMiddleCol+6,9), "SO", font=fontMedReg, fill=fillWhite)
 
